@@ -1,0 +1,14 @@
+{
+  "name": "cashier",
+  "version": "1.0.0",
+  "description": "cashier app",
+  "main": "index.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "author": "Noprizal",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^30.0.9"
+  }
+}
