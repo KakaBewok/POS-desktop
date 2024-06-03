@@ -3,20 +3,32 @@ const { app, BrowserWindow } = electron;
 
 let mainWindow;
 
-mainWin = () => {
+const mainWin = () => {
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
     },
     height: 550,
-    rezisable: false,
     autoHideMenuBar: true,
     title: "My POS 1.0.0",
   });
-
+  // mainWindow.webContents.openDevTools();
+  mainWindow.setResizable(false);
   mainWindow.loadFile("index.html");
 };
 
 app.on("ready", () => {
   mainWin();
+
+  app.on('activate', () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      mainWin()
+    }
+  })
 });
+
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') {
+    app.quit()
+  }
+})
