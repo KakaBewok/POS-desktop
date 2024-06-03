@@ -24,15 +24,19 @@
             aria-haspopup="true"
             aria-expanded="false"
           >
-            <span id="userFirstName"></span>
+            <span id="userFirstName">click</span>
           </a>
-          <ul class="dropdown-menu dropdown-menu-end dropdown-light">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
+          <div
+            class="dropdown-menu dropdown-menu-end dropdown-light"
+            style="width: 350px"
+            aria-labelledby="userInfoDropdown"
+          >
+            <div class="dropdown-body"></div>
+          </div>
         </div>
       </div>
     </nav>
+    <script src="./assets/popper.min.js"></script>
+    <script src="./assets/bootstrap/js/bootstrap.min.js"></script>
   </body>
 </html>
