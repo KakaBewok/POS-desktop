@@ -8,6 +8,7 @@ const mainWin = () => {
     webPreferences: {
       nodeIntegration: true,
     },
+    // width: 800, 
     height: 550,
     autoHideMenuBar: true,
     title: "My POS 1.0.0",
