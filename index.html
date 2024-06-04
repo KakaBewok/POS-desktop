@@ -8,11 +8,13 @@
   </head>
   <body>
     <nav
-      class="h-15 w-full flex items-center justify-between px-4 bg-slate-200"
+      class="h-13 w-full flex items-center justify-between px-4 bg-slate-300"
     >
-      <h1 class="m-3 py-2 px-3 bg-white">Logo</h1>
+      <h1 class="m-2 py-1 px-2 bg-white rounded-md" id="store-name">My Store</h1>
       <div class="dropdown dropdown-hover dropdown-end">
-        <div tabindex="0" role="button" class="btn m-1">Click</div>
+        <div tabindex="0" role="button" class="btn btn-sm m-2 hover:bg-slate-600 hover:text-white" id="userInfoDropdown">
+          <span id="userFirstName">Rizal</span>
+        </div>
         <ul
           tabindex="0"
           class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
