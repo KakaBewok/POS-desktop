@@ -1,29 +1,79 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:wght@400;700&display=swap">
-    <link href="./assets/css/output.css" rel="stylesheet" />
-    <title>My POS</title>
-  </head>
-  <body style="font-family: Roboto;">
-    <nav
-      class="h-14 w-full flex items-center justify-between px-4 bg-slate-100"
-    >
-      <h1 class="py-1 px-3 bg-white rounded-md" id="store-name">My Store</h1>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:wght@400;700&display=swap">
+  <link href="./assets/css/output.css" rel="stylesheet" />
+  <link href="./assets/fontawesome/css/all.min.css" rel="stylesheet" />
+  <title>My POS</title>
+</head>
+
+<body style="font-family: Roboto;">
+  <!-- navbar -->
+  <nav class="h-14 w-full flex items-center justify-between px-4 bg-slate-200">
+    <h1 class="py-1 px-3 bg-white rounded-md" id="store-name">My Store</h1>
+    <div class="flex items-center justify-center gap-1">
+      <!-- user info dropdown -->
       <div class="dropdown dropdown-end">
-        <div tabindex="0" role="button" class="btn btn-sm font-medium bg-white text-slate-600 hover:text-white hover:bg-slate-500" id="userInfoDropdown">
+        <div tabindex="0" role="button"
+          class="btn btn-sm font-medium bg-white text-slate-600 hover:text-white hover:bg-slate-500"
+          id="userInfoDropdown">
+          <i class="fa fa-user"></i>
           <span id="userFirstName" class="tracking-wider">Rizal</span>
         </div>
-        <ul
-          tabindex="0"
-          class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mt-3"
-        >
-          <li><a>Item 1</a></li>
-          <li><a>Item 2</a></li>
+        <div tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mt-3">
+          <div class="overflow-x-auto">
+            <table class="table">
+              <thead class="text-sm text-slate-600">
+                <tr>
+                  <th>Access Level</th>
+                  <th>Position</th>
+                </tr>
+              </thead>
+              <tbody class="text-xs">
+                <tr>
+                  <td id="userAccessLevel">1</td>
+                  <td id="userPosition">Admin</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <!-- sign out button -->
+      <button class="btn btn-sm btn-error text-white font-normal"><i class="fa fa-sign-out"></i></button>
+      <!-- settings dropdown -->
+      <div class="dropdown dropdown-end">
+        <div tabindex="0" role="button" class="btn btn-sm btn-neutral font-medium text-slate-600 hover:bg-slate-700"
+          id="settingDropdown">
+          <i class="fa fa-cog text-white"></i>
+        </div>
+        <ul tabindex="0" class="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 mt-3">
+          <li><a id="general-setting" href="#"><i class="fa fa-cogs mr-1"></i><span
+                class="text-xs text-slate-600 font-medium tracking-wider">General
+                Settings</span></a>
+          </li>
+          <hr class="my-2">
+          <li><a id="user-setting" href="#"><i class="fa fa-users mr-1"></i><span
+                class="text-xs text-slate-600 font-medium tracking-wider">User
+                Settings</span></a>
+          </li>
+          <hr class="my-2">
+          <li><a id="store-profile-setting" href="#"><i class="fa fa-building mr-1"></i><span
+                class="text-xs text-slate-600 font-medium tracking-wider">Store Profile
+                Settings</span></a>
+          </li>
         </ul>
       </div>
-    </nav>
-  </body>
+      <!-- minimize & close buttons -->
+      <button class="btn btn-sm btn-neutral text-white font-normal"><i class="fa fa-window-minimize"></i></button>
+      <button class="btn btn-sm btn-neutral text-white font-normal"><i class="fa fa-times"></i></button>
+    </div>
+  </nav>
+
+  <!-- main menu -->
+</body>
+
 </html>
