@@ -56,6 +56,7 @@
       </div>
     </nav>
 
+    <!-- toolbar -->
     <div
       class="flex items-center justify-start w-full gap-2 pl-4 h-11 bg-slate-100"
     >
@@ -137,12 +138,41 @@
       </div>
 
       <!-- pagination -->
-      <div class="text-sm border rounded-sm join border-slate-400">
-        <button class="join-item btn btn-xs">«</button>
-        <button class="join-item btn btn-xs">Page 22</button>
-        <button class="join-item btn btn-xs">»</button>
+      <div
+        class="text-sm border rounded-sm join border-slate-400"
+        id="pagination"
+      >
+        <button class="join-item btn btn-xs" id="first-page">
+          <i class="fa fa-step-backward"></i>
+        </button>
+        <button class="join-item btn btn-xs" id="prev-page">
+          <i class="fa fa-backward"></i>
+        </button>
+        <input
+          type="text"
+          class="text-center border-none w-9 text-slate-900"
+          value="1"
+          id="number-page"
+          disabled
+        />
+        <input
+          type="text"
+          class="text-center border-l w-9 text-slate-900 border-slate-400"
+          value="100"
+          id="total-page"
+          disabled
+        />
+        <button class="join-item btn btn-xs" id="next-page">
+          <i class="fa fa-step-forward"></i>
+        </button>
+        <button class="join-item btn btn-xs" id="last-page">
+          <i class="fa fa-forward"></i>
+        </button>
       </div>
     </div>
+
+    <!-- table -->
+    <div id="main-table"></div>
 
     <!-- javascript -->
     <script src="../assets/jquery/jquery-1.9.0.min.js"></script>
