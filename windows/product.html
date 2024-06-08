@@ -150,14 +150,14 @@
         </button>
         <input
           type="text"
-          class="text-center border-none w-9 text-slate-900"
+          class="font-medium text-center border-none w-9 text-slate-900"
           value="1"
           id="number-page"
           disabled
         />
         <input
           type="text"
-          class="text-center border-l w-9 text-slate-900 border-slate-400"
+          class="font-medium text-center border-none w-9 text-slate-900 bg-slate-300"
           value="100"
           id="total-page"
           disabled
@@ -173,6 +173,83 @@
 
     <!-- table -->
     <div id="main-table">
+      <!-- form add -->
+      <div id="form-add-data">
+        <div class="flex items-end gap-3 px-4 py-2">
+          <!-- product name -->
+          <div class="flex flex-col gap-1">
+            <h6 class="text-sm font-semibold text-slate-800">Add Data</h6>
+            <input
+              type="text"
+              placeholder="Product name"
+              class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
+              id="product-name"
+              required
+            />
+          </div>
+          <!-- category -->
+          <select
+            class="rounded-sm w-13 select select-xs select-bordered border-slate-400"
+            id="product-category"
+          >
+            <option selected disabled>Category</option>
+            <option>Coffe</option>
+            <option>Milk</option>
+          </select>
+          <!-- product price -->
+          <input
+            type="text"
+            placeholder="Product price"
+            class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
+            id="product-price"
+            required
+          />
+          <!-- product cost -->
+          <input
+            type="text"
+            placeholder="Product cost"
+            class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
+            id="product-cost"
+            required
+          />
+          <!-- product initial stock -->
+          <input
+            type="text"
+            placeholder="Initial stock (Qty)"
+            class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
+            id="product-initial-stock"
+            required
+          />
+          <!-- unit -->
+          <select
+            class="rounded-sm w-13 select select-xs select-bordered border-slate-400"
+            id="product-unit"
+          >
+            <option selected disabled>Unit</option>
+            <option>Pcs</option>
+            <option>Kg</option>
+          </select>
+          <!-- product barcode -->
+          <input
+            type="text"
+            placeholder="Barcode"
+            class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
+            id="product-barcode"
+            required
+          />
+          <button
+            class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-accent"
+          >
+            <i class="fa fa-paper-plane"></i>Submit
+          </button>
+          <button
+            class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-neutral"
+          >
+            <i class="fa fa-times"></i>Close
+          </button>
+        </div>
+      </div>
+      <hr class="mt-2" />
       <div class="py-5">
         <div class="overflow-x-auto">
           <table class="table table-zebra">
@@ -187,12 +264,12 @@
                 <th>Category</th>
                 <th>Unit</th>
                 <th>Price/Unit</th>
-                <th>Cost of Goods Sold</th>
+                <th>Product Cost</th>
                 <th>Opening Balance</th>
                 <th></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="data">
               <!-- row 1 -->
               <tr>
                 <th></th>
