@@ -13,7 +13,7 @@ function loadProduct() {
       } else {
         rows.forEach((row) => {
           result += `
-                        <tr data-id=${row.id} class="text-black" >
+                        <tr data-id=${row.id} >
                             <td></td>
                             <td>${row.product_name}</td>
                             <td>${row.product_code}</td>
@@ -25,12 +25,12 @@ function loadProduct() {
                             <td>${row.unit}</td>
                             <td>
                                 <button
-                                    class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-primary"
+                                    class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-accent"
                                 >
                                     <i class="fa fa-edit"></i>
                                 </button>
                                 <button
-                                    class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-secondary"
+                                    class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-error"
                                 >
                                     <i class="fa fa-trash"></i>
                                 </button>
