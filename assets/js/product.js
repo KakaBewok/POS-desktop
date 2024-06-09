@@ -1,4 +1,4 @@
-const db = require("../../config/database/config-db");
+const db = require("../config/database/config-db");
 
 function loadProduct() {
   const query = `SELECT * FROM product`;
@@ -6,7 +6,7 @@ function loadProduct() {
   db.serialize(() => {
     db.all(query, (err, rows) => {
       if (err) throw err;
-      let result = "";
+      let result = null;
 
       if (rows.length < 1) {
         result += "";
@@ -14,6 +14,7 @@ function loadProduct() {
         rows.forEach((row) => {
           result += `
                         <tr data-id=${row.id} class="text-black" >
+                            <td></td>
                             <td>${row.product_name}</td>
                             <td>${row.product_code}</td>
                             <td>${row.barcode}</td>
@@ -26,12 +27,12 @@ function loadProduct() {
                                 <button
                                     class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-primary"
                                 >
-                                    <i class="fa fa-edit"></i>Close
+                                    <i class="fa fa-edit"></i>
                                 </button>
                                 <button
                                     class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-secondary"
                                 >
-                                    <i class="fa fa-trash"></i>Delete
+                                    <i class="fa fa-trash"></i>
                                 </button>
                             </td>
                         </tr>
@@ -44,4 +45,4 @@ function loadProduct() {
   });
 }
 
-module.exports = loadProduct;
+// module.exports = loadProduct;
