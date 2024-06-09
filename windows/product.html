@@ -13,7 +13,7 @@
     <title>My POS | Product</title>
   </head>
 
-  <body style="font-family: Roboto">
+  <body style="font-family: Roboto" id="product-data">
     <!-- navbar -->
     <nav class="flex items-center justify-between w-full h-12 px-4 bg-cyan-500">
       <div class="flex items-center gap-3">
@@ -58,12 +58,15 @@
 
     <!-- toolbar -->
     <div
-      class="flex items-center justify-start w-full gap-2 pl-4 h-11 bg-slate-100"
+      class="flex items-center justify-start w-full gap-1 pl-4 h-11 bg-slate-100"
     >
       <div
         tabindex="0"
         role="button"
         class="border rounded-sm btn btn-xs btn-outline border-slate-400"
+        id="add-data"
+        title="Add data"
+        onclick="openFormAddData()"
       >
         <i class="fa-solid fa-plus"></i>
       </div>
@@ -157,7 +160,7 @@
         />
         <input
           type="text"
-          class="font-medium text-center border-none w-9 text-slate-900 bg-slate-300"
+          class="font-medium text-center border-none w-9 text-slate-900 bg-slate-200"
           value="100"
           id="total-page"
           disabled
@@ -174,8 +177,8 @@
     <!-- table -->
     <div id="main-table">
       <!-- form add -->
-      <div id="form-add-data">
-        <div class="flex items-end gap-3 px-4 py-2">
+      <div id="form-add-data" class="hidden">
+        <div class="flex items-end gap-2 px-4 py-2">
           <!-- product name -->
           <div class="flex flex-col gap-1">
             <h6 class="text-sm font-semibold text-slate-800">Add Data</h6>
@@ -244,19 +247,20 @@
           </button>
           <button
             class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-neutral"
+            id="close-form-add-data"
+            onclick="closeFormAddData()"
           >
             <i class="fa fa-times"></i>Close
           </button>
         </div>
       </div>
-      <hr class="mt-2" />
+      <hr class="hidden mt-2" id="table-separator" />
       <div class="py-5">
         <div class="overflow-x-auto">
           <table class="table table-zebra">
             <!-- head -->
             <thead>
-              <tr>
-                <th></th>
+              <tr class="text-sm font-semibold text-slate-800">
                 <th>Id</th>
                 <th>Product</th>
                 <th>Product Code</th>
@@ -270,20 +274,51 @@
               </tr>
             </thead>
             <tbody id="data">
-              <!-- row 1 -->
-              <tr>
-                <th></th>
-                <td>112</td>
-                <td>T-Shirt</td>
-                <td>TST</td>
-                <td>-</td>
-                <td>Clothes</td>
-                <td>Pcs</td>
-                <td>250000</td>
-                <td>200000</td>
-                <td>1300000</td>
-                <td></td>
+              <!-- <tr data-id="1" class="text-black">
+                <td>Americano Beans</td>
+                <td>3213</td>
+                <td>null</td>
+                <td>Coffe</td>
+                <td>55000</td>
+                <td>53000</td>
+                <td>null</td>
+                <td>null</td>
+                <td>
+                  <button
+                    class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-primary"
+                  >
+                    <i class="fa fa-edit"></i>Close
+                  </button>
+                  <button
+                    class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-secondary"
+                  >
+                    <i class="fa fa-trash"></i>Delete
+                  </button>
+                </td>
               </tr>
+
+              <tr data-id="2" class="text-black">
+                <td>Arabica Beans</td>
+                <td>3393</td>
+                <td>null</td>
+                <td>Coffe</td>
+                <td>59000</td>
+                <td>54000</td>
+                <td>null</td>
+                <td>null</td>
+                <td>
+                  <button
+                    class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-primary"
+                  >
+                    <i class="fa fa-edit"></i>Close
+                  </button>
+                  <button
+                    class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-secondary"
+                  >
+                    <i class="fa fa-trash"></i>Delete
+                  </button>
+                </td>
+              </tr> -->
             </tbody>
           </table>
         </div>
@@ -292,5 +327,8 @@
 
     <!-- javascript -->
     <script src="../assets/jquery/jquery-1.9.0.min.js"></script>
+    <script src="../assets/js/toolbar.js"></script>
+    <script src="../assets/js/product.js"></script>
+    <script src="../assets/js/main.js"></script>
   </body>
 </html>

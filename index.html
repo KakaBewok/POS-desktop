@@ -1,178 +1,275 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:wght@400;700&display=swap"
+    />
+    <link href="./assets/css/output.css" rel="stylesheet" />
+    <link href="./assets/fontawesome/css/all.min.css" rel="stylesheet" />
+    <title>My POS</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:wght@400;700&display=swap" />
-  <link href="./assets/css/output.css" rel="stylesheet" />
-  <link href="./assets/fontawesome/css/all.min.css" rel="stylesheet" />
-  <title>My POS</title>
-</head>
-
-<body style="font-family: Roboto">
-  <!-- navbar -->
-  <nav class="flex items-center justify-between w-full h-12 px-4 bg-cyan-500">
-    <h1 class="px-3 py-1 bg-white rounded-md" id="store-name">My Store</h1>
-    <div class="flex items-end justify-center gap-1">
-      <!-- user info dropdown -->
-      <div class="dropdown dropdown-end">
-        <div tabindex="0" role="button" class="font-medium rounded-sm btn btn-xs btn-neutral" id="userInfoDropdown">
-          <i class="fa fa-user"></i>
-          <span id="userFirstName" class="tracking-wider">Rizal</span>
-        </div>
-        <div tabindex="0"
-          class="dropdown-content rounded-md z-[1] menu p-2 shadow-md shadow-cyan-200 bg-base-100 w-52 mt-1">
-          <div class="overflow-x-auto">
-            <table class="table">
-              <thead class="text-sm text-slate-600">
-                <tr class="text-slate-800">
-                  <th>Access Level</th>
-                  <th>Position</th>
-                </tr>
-              </thead>
-              <tbody class="text-xs">
-                <tr class="text-slate-700">
-                  <td id="userAccessLevel">1</td>
-                  <td id="userPosition">Admin</td>
-                </tr>
-              </tbody>
-            </table>
+  <body style="font-family: Roboto">
+    <!-- navbar -->
+    <nav class="flex items-center justify-between w-full h-12 px-4 bg-cyan-500">
+      <h1 class="px-3 py-1 bg-white rounded-md" id="store-name">My Store</h1>
+      <div class="flex items-end justify-center gap-1">
+        <!-- user info dropdown -->
+        <div class="dropdown dropdown-end">
+          <div
+            tabindex="0"
+            role="button"
+            class="font-medium rounded-sm btn btn-xs btn-neutral"
+            id="userInfoDropdown"
+          >
+            <i class="fa fa-user"></i>
+            <span id="userFirstName" class="tracking-wider">Rizal</span>
+          </div>
+          <div
+            tabindex="0"
+            class="dropdown-content rounded-md z-[1] menu p-2 shadow-md shadow-cyan-200 bg-base-100 w-52 mt-1"
+          >
+            <div class="overflow-x-auto">
+              <table class="table">
+                <thead class="text-sm text-slate-600">
+                  <tr class="text-slate-800">
+                    <th>Access Level</th>
+                    <th>Position</th>
+                  </tr>
+                </thead>
+                <tbody class="text-xs">
+                  <tr class="text-slate-700">
+                    <td id="userAccessLevel">1</td>
+                    <td id="userPosition">Admin</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
-      </div>
-      <!-- settings dropdown -->
-      <div class="dropdown dropdown-end">
-        <div tabindex="0" role="button" class="font-medium rounded-sm btn btn-xs btn-neutral text-slate-600"
-          id="settingDropdown">
-          <i class="text-white fa fa-cog"></i>
+        <!-- settings dropdown -->
+        <div class="dropdown dropdown-end">
+          <div
+            tabindex="0"
+            role="button"
+            class="font-medium rounded-sm btn btn-xs btn-neutral text-slate-600"
+            id="settingDropdown"
+          >
+            <i class="text-white fa fa-cog"></i>
+          </div>
+          <ul
+            tabindex="0"
+            class="dropdown-content z-[1] rounded-md menu p-2 bg-base-100 w-52 mt-1 shadow-md shadow-cyan-200"
+          >
+            <li>
+              <a id="general-setting" href="#"
+                ><i class="mr-1 fa fa-cogs"></i
+                ><span class="text-xs font-medium tracking-wider text-slate-800"
+                  >General Settings</span
+                ></a
+              >
+            </li>
+            <hr class="my-2" />
+            <li>
+              <a id="user-setting" href="#"
+                ><i class="mr-1 fa fa-users"></i
+                ><span class="text-xs font-medium tracking-wider text-slate-800"
+                  >User Settings</span
+                ></a
+              >
+            </li>
+            <hr class="my-2" />
+            <li>
+              <a id="store-profile-setting" href="#"
+                ><i class="mr-1 fa fa-building"></i
+                ><span class="text-xs font-medium tracking-wider text-slate-800"
+                  >Store Profile Settings</span
+                ></a
+              >
+            </li>
+          </ul>
         </div>
-        <ul tabindex="0"
-          class="dropdown-content z-[1] rounded-md menu p-2 bg-base-100 w-52 mt-1 shadow-md shadow-cyan-200">
-          <li>
-            <a id="general-setting" href="#"><i class="mr-1 fa fa-cogs"></i><span
-                class="text-xs font-medium tracking-wider text-slate-800">General Settings</span></a>
-          </li>
-          <hr class="my-2" />
-          <li>
-            <a id="user-setting" href="#"><i class="mr-1 fa fa-users"></i><span
-                class="text-xs font-medium tracking-wider text-slate-800">User Settings</span></a>
-          </li>
-          <hr class="my-2" />
-          <li>
-            <a id="store-profile-setting" href="#"><i class="mr-1 fa fa-building"></i><span
-                class="text-xs font-medium tracking-wider text-slate-800">Store Profile Settings</span></a>
-          </li>
-        </ul>
+        <!-- minimize & close buttons -->
+        <button
+          class="font-normal text-white rounded-sm btn btn-xs btn-neutral"
+        >
+          <i class="fa fa-window-minimize"></i>
+        </button>
+        <button
+          class="font-normal text-white rounded-sm btn btn-xs btn-neutral"
+        >
+          <i class="fa fa-times"></i>
+        </button>
+        <!-- sign out button -->
+        <button class="font-normal text-white rounded-sm btn btn-xs btn-error">
+          <i class="fa fa-sign-out"></i>
+        </button>
       </div>
-      <!-- minimize & close buttons -->
-      <button class="font-normal text-white rounded-sm btn btn-xs btn-neutral">
-        <i class="fa fa-window-minimize"></i>
-      </button>
-      <button class="font-normal text-white rounded-sm btn btn-xs btn-neutral">
-        <i class="fa fa-times"></i>
-      </button>
-      <!-- sign out button -->
-      <button class="font-normal text-white rounded-sm btn btn-xs btn-error">
-        <i class="fa fa-sign-out"></i>
-      </button>
-    </div>
-  </nav>
+    </nav>
 
-  <!-- main menu -->
-  <div class="flex flex-wrap items-center justify-center w-full gap-5 py-16 bg-slate-100">
-    <!-- 1 -->
-    <div class="overflow-hidden rounded-md shadow-lg card max-w-48 bg-base-100 shadow-cyan-200">
-      <a href="#" class="hover:opacity-70 hover:transition-opacity hover:duration-500 p-7">
-        <figure>
-          <img src="./assets/images/cash-machine.png" alt="Cashier" class="object-fill" />
-        </figure>
-      </a>
-      <div class="p-3 card-body bg-cyan-500">
-        <h4 class="text-base font-semibold tracking-wider card-title text-slate-100">
-          Cashier
-        </h4>
+    <!-- main menu -->
+    <div
+      class="flex flex-wrap items-center justify-center w-full gap-5 py-16 bg-slate-100"
+    >
+      <!-- 1 -->
+      <div
+        class="overflow-hidden rounded-md shadow-lg card max-w-48 bg-base-100 shadow-cyan-200"
+      >
+        <a
+          href="#"
+          class="hover:opacity-70 hover:transition-opacity hover:duration-400 p-7"
+        >
+          <figure>
+            <img
+              src="./assets/images/cash-machine.png"
+              alt="Cashier"
+              class="object-fill"
+            />
+          </figure>
+        </a>
+        <div class="p-3 card-body bg-cyan-500">
+          <h4
+            class="text-base font-semibold tracking-wider card-title text-slate-100"
+          >
+            Cashier
+          </h4>
+        </div>
+      </div>
+      <!-- 2 -->
+      <div
+        class="overflow-hidden rounded-md shadow-lg card max-w-48 bg-base-100 shadow-cyan-200"
+      >
+        <a
+          href="#"
+          class="hover:opacity-70 hover:transition-opacity hover:duration-400 p-7"
+        >
+          <figure>
+            <img
+              src="./assets/images/grocery-cart.png"
+              alt="Sales"
+              class="object-fill"
+            />
+          </figure>
+        </a>
+        <div class="p-3 card-body bg-cyan-500">
+          <h4
+            class="text-base font-semibold tracking-wider card-title text-slate-100"
+          >
+            Sales
+          </h4>
+        </div>
+      </div>
+      <!-- 3 -->
+      <div
+        class="overflow-hidden rounded-md shadow-lg card max-w-48 bg-base-100 shadow-cyan-200"
+      >
+        <a
+          href="#"
+          class="hover:opacity-70 hover:transition-opacity hover:duration-400 p-7"
+        >
+          <figure>
+            <img
+              src="./assets/images/report.png"
+              alt="Report"
+              class="object-fill"
+            />
+          </figure>
+        </a>
+        <div class="p-3 card-body bg-cyan-500">
+          <h4
+            class="text-base font-semibold tracking-wider card-title text-slate-100"
+          >
+            Sales Report
+          </h4>
+        </div>
+      </div>
+
+      <!-- 4 -->
+      <div
+        class="overflow-hidden rounded-md shadow-lg card max-w-48 bg-base-100 shadow-cyan-200"
+      >
+        <a
+          href="#"
+          class="hover:opacity-70 hover:transition-opacity hover:duration-400 p-7"
+        >
+          <figure>
+            <img
+              src="./assets/images/sales-amount.png"
+              alt="Graphic"
+              class="object-fill"
+            />
+          </figure>
+        </a>
+        <div class="p-3 card-body bg-cyan-500">
+          <h4
+            class="text-base font-semibold tracking-wider card-title text-slate-100"
+          >
+            Graphic
+          </h4>
+        </div>
+      </div>
+      <!-- 5 -->
+      <div
+        class="overflow-hidden rounded-md shadow-lg card max-w-48 bg-base-100 shadow-cyan-200"
+      >
+        <a
+          href="#"
+          class="hover:opacity-70 hover:transition-opacity hover:duration-400 p-7"
+          onclick="product()"
+        >
+          <figure>
+            <img
+              src="./assets/images/box.png"
+              alt="Product"
+              class="object-fill"
+            />
+          </figure>
+        </a>
+        <div class="p-3 card-body bg-cyan-500">
+          <h4
+            class="text-base font-semibold tracking-wider card-title text-slate-100"
+          >
+            Product
+          </h4>
+        </div>
+      </div>
+      <!-- 6 -->
+      <div
+        class="overflow-hidden rounded-md shadow-lg card max-w-48 bg-base-100 shadow-cyan-200"
+      >
+        <a
+          href="#"
+          class="hover:opacity-70 hover:transition-opacity hover:duration-400 p-7"
+        >
+          <figure>
+            <img
+              src="./assets/images/customer-feedback.png"
+              alt="Customer"
+              class="object-fill"
+            />
+          </figure>
+        </a>
+        <div class="p-3 card-body bg-cyan-500">
+          <h4
+            class="text-base font-semibold tracking-wider card-title text-slate-100"
+          >
+            Customer
+          </h4>
+        </div>
       </div>
     </div>
-    <!-- 2 -->
-    <div class="overflow-hidden rounded-md shadow-lg card max-w-48 bg-base-100 shadow-cyan-200">
-      <a href="#" class="hover:opacity-70 hover:transition-opacity hover:duration-500 p-7">
-        <figure>
-          <img src="./assets/images/grocery-cart.png" alt="Sales" class="object-fill" />
-        </figure>
-      </a>
-      <div class="p-3 card-body bg-cyan-500">
-        <h4 class="text-base font-semibold tracking-wider card-title text-slate-100">
-          Sales
-        </h4>
-      </div>
-    </div>
-    <!-- 3 -->
-    <div class="overflow-hidden rounded-md shadow-lg card max-w-48 bg-base-100 shadow-cyan-200">
-      <a href="#" class="hover:opacity-70 hover:transition-opacity hover:duration-500 p-7">
-        <figure>
-          <img src="./assets/images/report.png" alt="Report" class="object-fill" />
-        </figure>
-      </a>
-      <div class="p-3 card-body bg-cyan-500">
-        <h4 class="text-base font-semibold tracking-wider card-title text-slate-100">
-          Sales Report
-        </h4>
-      </div>
-    </div>
 
-    <!-- 4 -->
-    <div class="overflow-hidden rounded-md shadow-lg card max-w-48 bg-base-100 shadow-cyan-200">
-      <a href="#" class="hover:opacity-70 hover:transition-opacity hover:duration-500 p-7">
-        <figure>
-          <img src="./assets/images/sales-amount.png" alt="Graphic" class="object-fill" />
-        </figure>
-      </a>
-      <div class="p-3 card-body bg-cyan-500">
-        <h4 class="text-base font-semibold tracking-wider card-title text-slate-100">
-          Graphic
-        </h4>
-      </div>
-    </div>
-    <!-- 5 -->
-    <div class="overflow-hidden rounded-md shadow-lg card max-w-48 bg-base-100 shadow-cyan-200">
-      <a href="#" class="hover:opacity-70 hover:transition-opacity hover:duration-500 p-7" onclick="product()">
-        <figure>
-          <img src="./assets/images/box.png" alt="Product" class="object-fill" />
-        </figure>
-      </a>
-      <div class="p-3 card-body bg-cyan-500">
-        <h4 class="text-base font-semibold tracking-wider card-title text-slate-100">
-          Product
-        </h4>
-      </div>
-    </div>
-    <!-- 6 -->
-    <div class="overflow-hidden rounded-md shadow-lg card max-w-48 bg-base-100 shadow-cyan-200">
-      <a href="#" class="hover:opacity-70 hover:transition-opacity hover:duration-500 p-7">
-        <figure>
-          <img src="./assets/images/customer-feedback.png" alt="Customer" class="object-fill" />
-        </figure>
-      </a>
-      <div class="p-3 card-body bg-cyan-500">
-        <h4 class="text-base font-semibold tracking-wider card-title text-slate-100">
-          Customer
-        </h4>
-      </div>
-    </div>
-  </div>
+    <!-- javascript -->
+    <script src="./assets/jquery/jquery-1.9.0.min.js"></script>
+    <script>
+      const ipcRenderer = require("electron").ipcRenderer;
 
-  <!-- javascript -->
-  <script src="./assets/jquery/jquery-1.9.0.min.js"></script>
-  <script>
-    const ipcRenderer = require("electron").ipcRenderer;
-
-    const product = () => {
-      ipcRenderer.send("load:product-window");
-    }
-
-
-  </script>
-</body>
-
+      const product = () => {
+        ipcRenderer.send("load:product-window");
+      };
+    </script>
+  </body>
 </html>

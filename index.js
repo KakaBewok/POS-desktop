@@ -1,5 +1,6 @@
 const electron = require("electron");
 const { app, BrowserWindow, ipcMain, screen } = electron;
+const db = require("./config/database/config-db");
 
 let mainWindow;
 let productWindow;
@@ -8,7 +9,7 @@ const mainWin = () => {
   mainWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
     },
     height: 550,
     autoHideMenuBar: true,
@@ -17,28 +18,31 @@ const mainWin = () => {
   // mainWindow.webContents.openDevTools();
   mainWindow.setResizable(false);
   mainWindow.loadFile("index.html");
+  // db.serialize(() => {
+  //   console.log("test db main");
+  // });
 };
 
 app.on("ready", () => {
   mainWin();
 
-  app.on('activate', () => {
+  app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      mainWin()
+      mainWin();
     }
-  })
+  });
 });
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
+app.on("window-all-closed", () => {
+  if (process.platform !== "darwin") {
+    app.quit();
   }
-})
+});
 
 //communication with rendererProcess (front end)
 ipcMain.on("load:product-window", () => {
-  productWin()
-})
+  productWin();
+});
 
 const productWin = () => {
   const { width, height } = screen.getPrimaryDisplay().workAreaSize;
@@ -46,21 +50,20 @@ const productWin = () => {
   productWindow = new BrowserWindow({
     webPreferences: {
       nodeIntegration: true,
-      contextIsolation: false
+      contextIsolation: false,
     },
     autoHideMenuBar: true,
     width,
     height,
-    title: "My POS | Product"
-  })
+    title: "My POS | Product",
+  });
   // productWindow.webContents.openDevTools();
   productWindow.loadFile("windows/product.html");
 
   productWindow.webContents.on("did-finish-load", () => {
     mainWindow.hide();
-  })
+  });
   productWindow.on("close", () => {
     mainWindow.show();
-  })
-
-}
+  });
+};

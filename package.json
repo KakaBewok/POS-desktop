@@ -10,7 +10,8 @@
   "author": "Noprizal",
   "license": "ISC",
   "dependencies": {
-    "electron": "^30.0.9"
+    "electron": "^30.0.9",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.19",
