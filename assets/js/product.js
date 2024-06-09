@@ -1,6 +1,4 @@
-const db = require("../config/database/config-db");
-
-function loadProduct() {
+const loadProduct = () => {
   const query = `SELECT * FROM product`;
 
   db.serialize(() => {
@@ -43,6 +41,59 @@ function loadProduct() {
       $("tbody#data").html(result);
     });
   });
-}
+};
 
-// module.exports = loadProduct;
+const blankForm = () => {
+  $("#product-name").val("");
+  $("#product-code").val("");
+  $("#product-category").val("");
+  $("#product-price").val("");
+  $("#product-cost").val("");
+  $("#product-initial-stock").val("");
+  $("#product-unit").val("");
+  $("#product-barcode").val("");
+};
+
+const insertProduct = () => {
+  let productName = $("#product-name").val();
+  let productCode = $("#product-code").val();
+  let productCategory = $("#product-category").val();
+  let productPrice = $("#product-price").val();
+  let productCost = $("#product-cost").val();
+  let productInitialStock = $("#product-initial-stock").val();
+  let productUnit = $("#product-unit").val();
+  let productBarcode = $("#product-barcode").val();
+
+  let query = `
+                insert into product
+                (
+                  product_name,
+                  product_code,
+                  category,
+                  selling_price,
+                  cost_of_product,
+                  product_initial_qty,
+                  unit,
+                  barcode
+                )
+                values
+                (
+                '${productName}',
+                '${productCode}',
+                '${productCategory}',
+                '${productPrice}',
+                '${productCost}',
+                '${productInitialStock}',
+                '${productUnit}',
+                '${productBarcode}'
+                );
+              `;
+
+  db.run(query, (err) => {
+    if (err) throw err;
+
+    blankForm();
+    $("#product-name").focus();
+    loadData();
+  });
+};

@@ -190,10 +190,19 @@
               required
             />
           </div>
+          <!-- product code -->
+          <input
+            type="text"
+            placeholder="Product code"
+            class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
+            id="product-code"
+            required
+          />
           <!-- category -->
           <select
             class="rounded-sm w-13 select select-xs select-bordered border-slate-400"
             id="product-category"
+            required
           >
             <option selected disabled>Category</option>
             <option>Coffe</option>
@@ -227,6 +236,7 @@
           <select
             class="rounded-sm w-13 select select-xs select-bordered border-slate-400"
             id="product-unit"
+            required
           >
             <option selected disabled>Unit</option>
             <option>Pcs</option>
@@ -242,6 +252,7 @@
           />
           <button
             class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-accent"
+            onclick="insertProduct()"
           >
             <i class="fa fa-paper-plane"></i>Submit
           </button>
@@ -269,57 +280,11 @@
                 <th>Unit</th>
                 <th>Price/Unit</th>
                 <th>Product Cost</th>
-                <th>Opening Balance</th>
-                <th></th>
+                <th>Start Balance</th>
+                <th>Action</th>
               </tr>
             </thead>
-            <tbody id="data">
-              <!-- <tr data-id="1" class="text-black">
-                <td>Americano Beans</td>
-                <td>3213</td>
-                <td>null</td>
-                <td>Coffe</td>
-                <td>55000</td>
-                <td>53000</td>
-                <td>null</td>
-                <td>null</td>
-                <td>
-                  <button
-                    class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-primary"
-                  >
-                    <i class="fa fa-edit"></i>Close
-                  </button>
-                  <button
-                    class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-secondary"
-                  >
-                    <i class="fa fa-trash"></i>Delete
-                  </button>
-                </td>
-              </tr>
-
-              <tr data-id="2" class="text-black">
-                <td>Arabica Beans</td>
-                <td>3393</td>
-                <td>null</td>
-                <td>Coffe</td>
-                <td>59000</td>
-                <td>54000</td>
-                <td>null</td>
-                <td>null</td>
-                <td>
-                  <button
-                    class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-primary"
-                  >
-                    <i class="fa fa-edit"></i>Close
-                  </button>
-                  <button
-                    class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-secondary"
-                  >
-                    <i class="fa fa-trash"></i>Delete
-                  </button>
-                </td>
-              </tr> -->
-            </tbody>
+            <tbody id="data"></tbody>
           </table>
         </div>
       </div>
@@ -327,6 +292,7 @@
 
     <!-- javascript -->
     <script src="../assets/jquery/jquery-1.9.0.min.js"></script>
+    <script src="../assets/js/require.js"></script>
     <script src="../assets/js/toolbar.js"></script>
     <script src="../assets/js/product.js"></script>
     <script src="../assets/js/main.js"></script>

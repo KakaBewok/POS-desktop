@@ -11,16 +11,13 @@ const mainWin = () => {
       nodeIntegration: true,
       contextIsolation: false,
     },
-    height: 550,
+    height: 715,
     autoHideMenuBar: true,
     title: "My POS 1.0.0",
   });
   // mainWindow.webContents.openDevTools();
   mainWindow.setResizable(false);
   mainWindow.loadFile("index.html");
-  // db.serialize(() => {
-  //   console.log("test db main");
-  // });
 };
 
 app.on("ready", () => {
