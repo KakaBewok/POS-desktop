@@ -64,6 +64,7 @@ const insertProduct = () => {
   let productUnit = $("#product-unit").val();
   let productBarcode = $("#product-barcode").val();
 
+  //
   let required = $("[required]");
   let requiredArray = [];
   required.forEach(() => {
@@ -71,6 +72,7 @@ const insertProduct = () => {
       requiredArray.push($(this).val());
     }
   });
+  //
 
   let query = `
                 insert into product
