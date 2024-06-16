@@ -7,7 +7,8 @@
     />
     <link href="../assets/css/output.css" rel="stylesheet" />
     <link href="../assets/fontawesome/css/all.min.css" rel="stylesheet" />
-
+    <!-- imask -->
+    <script src="https://unpkg.com/imask"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My POS | Product</title>
@@ -82,6 +83,7 @@
         tabindex="0"
         role="button"
         class="border rounded-sm btn btn-xs btn-outline border-slate-400"
+        title="Export to excel"
       >
         <i class="fa-solid fa-file-excel"></i>
       </div>
@@ -89,6 +91,7 @@
         tabindex="0"
         role="button"
         class="border rounded-sm btn btn-xs btn-outline border-slate-400"
+        title="Export to pdf"
       >
         <i class="fa-solid fa-file-pdf"></i>
       </div>
@@ -96,6 +99,7 @@
         tabindex="0"
         role="button"
         class="border rounded-sm btn btn-xs btn-outline border-slate-400"
+        title="Print"
       >
         <i class="fa-solid fa-print"></i>
       </div>
@@ -103,6 +107,7 @@
         tabindex="0"
         role="button"
         class="border rounded-sm btn btn-xs btn-outline border-slate-400"
+        title="Check"
       >
         <i class="fa-solid fa-check"></i>
       </div>
@@ -110,6 +115,7 @@
         tabindex="0"
         role="button"
         class="border rounded-sm btn btn-xs btn-outline border-slate-400"
+        title="Cancel"
       >
         <i class="fa-solid fa-times"></i>
       </div>
@@ -118,6 +124,7 @@
       <select
         class="rounded-sm w-13 select select-xs select-bordered border-slate-400"
         id="row-per-page"
+        title="Row/page"
       >
         <option selected>10</option>
         <option>25</option>
@@ -126,7 +133,7 @@
       </select>
 
       <!-- search input -->
-      <div class="flex flex-row gap-1 form-control">
+      <div class="flex flex-row gap-1 form-control" title="Search data">
         <input
           type="text"
           placeholder="Search"
@@ -145,6 +152,7 @@
       <div
         class="text-sm border rounded-sm join border-slate-400"
         id="pagination"
+        title="Pagination"
       >
         <button class="join-item btn btn-xs" id="first-page">
           <i class="fa fa-step-backward"></i>
@@ -179,7 +187,7 @@
     <div id="main-table">
       <!-- form add -->
       <div id="form-add-data" class="hidden">
-        <div class="flex items-end gap-2 px-4 py-2">
+        <div class="flex flex-wrap items-end gap-2 px-4 py-2">
           <!-- product name -->
           <div class="flex flex-col gap-1">
             <h6 class="text-sm font-semibold text-slate-800">Add Data</h6>
@@ -288,6 +296,41 @@
     </div>
 
     <!-- javascript -->
+    <script>
+      const inputProductPrice = IMask(
+        document.getElementById("product-price"),
+        {
+          mask: "Rp {num}",
+          blocks: {
+            num: {
+              mask: Number,
+              thousandsSeparator: ".",
+              scale: 3,
+              radix: ",",
+              mapToRadix: ["."],
+              padFractionalZeros: false,
+              signed: false,
+              lazy: false,
+            },
+          },
+        }
+      );
+      const inputProductCost = IMask(document.getElementById("product-cost"), {
+        mask: "Rp {num}",
+        blocks: {
+          num: {
+            mask: Number,
+            thousandsSeparator: ".",
+            scale: 3,
+            radix: ",",
+            mapToRadix: ["."],
+            padFractionalZeros: false,
+            signed: false,
+            lazy: false,
+          },
+        },
+      });
+    </script>
     <script src="../assets/jquery/jquery-1.9.0.min.js"></script>
     <script src="../assets/js/require.js"></script>
     <script src="../assets/js/toolbar.js"></script>

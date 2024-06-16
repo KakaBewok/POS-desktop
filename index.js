@@ -1,6 +1,8 @@
 const electron = require("electron");
 const { app, BrowserWindow, ipcMain, screen } = electron;
 const db = require("./config/database/config-db");
+const remote = require("@electron/remote/main");
+remote.initialize();
 
 let mainWindow;
 let productWindow;
@@ -54,8 +56,10 @@ const productWin = () => {
     height,
     title: "My POS | Product",
   });
-  // productWindow.webContents.openDevTools();
+  productWindow.webContents.openDevTools();
   productWindow.loadFile("windows/product.html");
+
+  remote.enable(productWindow.webContents);
 
   productWindow.webContents.on("did-finish-load", () => {
     mainWindow.hide();

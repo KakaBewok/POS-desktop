@@ -37,7 +37,6 @@ const loadProduct = () => {
             `;
         });
       }
-      console.log(result);
       $("tbody#data").html(result);
     });
   });
@@ -46,11 +45,11 @@ const loadProduct = () => {
 const blankForm = () => {
   $("#product-name").val("");
   $("#product-code").val("");
-  $("#product-category").val("");
+  $("#product-category").val("Category");
   $("#product-price").val("");
   $("#product-cost").val("");
   $("#product-initial-stock").val("");
-  $("#product-unit").val("");
+  $("#product-unit").val("Unit");
   $("#product-barcode").val("");
 };
 
@@ -58,23 +57,38 @@ const insertProduct = () => {
   let productName = $("#product-name").val();
   let productCode = $("#product-code").val();
   let productCategory = $("#product-category").val();
-  let productPrice = $("#product-price").val();
-  let productCost = $("#product-cost").val();
+  let productPrice = inputProductPrice.unmaskedValue;
+  let productCost = inputProductCost.unmaskedValue;
   let productInitialStock = $("#product-initial-stock").val();
   let productUnit = $("#product-unit").val();
   let productBarcode = $("#product-barcode").val();
 
-  //
   let required = $("[required]");
   let requiredArray = [];
-  required.forEach(() => {
+  required.each(function () {
     if ($(this).val() != "") {
       requiredArray.push($(this).val());
     }
   });
-  //
 
-  let query = `
+  if (requiredArray.includes(null)) {
+    dialog.showMessageBoxSync({
+      title: "Alert",
+      type: "info",
+      message:
+        "Product name, product price, product cost and unit must be filled in.",
+    });
+  } else if (
+    parseInt(inputProductPrice.unmaskedValue) <
+    parseInt(inputProductCost.unmaskedValue)
+  ) {
+    dialog.showMessageBoxSync({
+      title: "Alert",
+      type: "info",
+      message: "Product price must be greater than product cost",
+    });
+  } else {
+    let query = `
                 insert into product
                 (
                   product_name,
@@ -98,12 +112,22 @@ const insertProduct = () => {
                 '${productBarcode}'
                 );
               `;
-
-  db.run(query, (err) => {
-    if (err) throw err;
-
-    blankForm();
-    $("#product-name").focus();
-    loadData();
-  });
+    db.serialize(() => {
+      db.run(query, (err) => {
+        if (err) {
+          throw err;
+        } else {
+          dialog.showMessageBoxSync({
+            title: "Alert",
+            message: "Success",
+            type: "info",
+            buttons: ["OK"],
+          });
+          blankForm();
+          $("#product-name").focus();
+          loadData();
+        }
+      });
+    });
+  }
 };

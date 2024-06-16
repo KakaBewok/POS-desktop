@@ -10,7 +10,9 @@
   "author": "Noprizal",
   "license": "ISC",
   "dependencies": {
+    "@electron/remote": "^2.1.2",
     "electron": "^30.0.9",
+    "imask": "^7.6.1",
     "sqlite3": "^5.1.7"
   },
   "devDependencies": {
