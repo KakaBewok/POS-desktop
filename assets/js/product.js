@@ -55,11 +55,10 @@ const blankForm = () => {
 
 const insertProduct = () => {
   let productName = $("#product-name").val();
-  let productCode = $("#product-code").val();
   let productCategory = $("#product-category").val();
   let productPrice = inputProductPrice.unmaskedValue;
   let productCost = inputProductCost.unmaskedValue;
-  let productInitialStock = $("#product-initial-stock").val();
+  let productInitialStock = inputProductInitialStock.unmaskedValue;
   let productUnit = $("#product-unit").val();
   let productBarcode = $("#product-barcode").val();
 
@@ -88,11 +87,10 @@ const insertProduct = () => {
       message: "Product price must be greater than product cost",
     });
   } else {
-    let query = `
+    let queryInsert = `
                 insert into product
                 (
                   product_name,
-                  product_code,
                   category,
                   selling_price,
                   cost_of_product,
@@ -102,32 +100,72 @@ const insertProduct = () => {
                 )
                 values
                 (
-                '${productName}',
-                '${productCode}',
-                '${productCategory}',
-                '${productPrice}',
-                '${productCost}',
-                '${productInitialStock}',
-                '${productUnit}',
-                '${productBarcode}'
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?,
+                ?
                 );
               `;
+    let queryCheckUniqueData = `select count(*) as row_number from product where product_name = ?`;
+    let queryGenerateProductCode = `select id from product where product_name = ?`;
+    let queryUpdateProductCode = `UPDATE product SET product_code = 'PR'||substr('000000'||?, -6, 6) WHERE product_name = ?`;
+
     db.serialize(() => {
-      db.run(query, (err) => {
-        if (err) {
-          throw err;
+      //check product name already exist ?
+      db.each(queryCheckUniqueData, [productName], (err, res) => {
+        if (err) throw err;
+        if (res.row_number < 1) {
+          ("");
+          db.run(
+            queryInsert,
+            [
+              productName,
+              productCategory,
+              productPrice,
+              productCost,
+              productInitialStock,
+              productUnit,
+              productBarcode,
+            ],
+            (err) => {
+              if (err) {
+                throw err;
+              } else {
+                dialog.showMessageBoxSync({
+                  title: "Alert",
+                  message: "Success",
+                  type: "info",
+                  buttons: ["OK"],
+                });
+                //generate product code
+                db.each(queryGenerateProductCode, [productName], (err, row) => {
+                  if (err) throw err;
+                  db.run(
+                    queryUpdateProductCode,
+                    [row.id, productName],
+                    (err) => {
+                      if (err) throw err;
+                      blankForm();
+                      $("#product-name").focus();
+                      loadData();
+                    }
+                  );
+                });
+              }
+            }
+          );
         } else {
           dialog.showMessageBoxSync({
             title: "Alert",
-            message: "Success",
             type: "info",
-            buttons: ["OK"],
+            message: "Product name already exist",
           });
-          blankForm();
-          $("#product-name").focus();
-          loadData();
         }
       });
+      //
     });
   }
 };

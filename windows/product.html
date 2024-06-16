@@ -199,13 +199,6 @@
               required
             />
           </div>
-          <!-- product code -->
-          <input
-            type="text"
-            placeholder="Product code"
-            class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
-            id="product-code"
-          />
           <!-- category -->
           <select
             class="rounded-sm w-13 select select-xs select-bordered border-slate-400"
@@ -330,6 +323,21 @@
           },
         },
       });
+      const inputProductInitialStock = IMask(
+        document.getElementById("product-initial-stock"),
+        {
+          mask: "{num}",
+          blocks: {
+            num: {
+              mask: Number,
+              thousandsSeparator: ".",
+              padFractionalZeros: false,
+              signed: false,
+              lazy: false,
+            },
+          },
+        }
+      );
     </script>
     <script src="../assets/jquery/jquery-1.9.0.min.js"></script>
     <script src="../assets/js/require.js"></script>
