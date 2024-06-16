@@ -12,7 +12,10 @@ const loadProduct = () => {
         rows.forEach((row) => {
           result += `
                         <tr data-id=${row.id} >
-                            <td></td>
+                            <td data-colname="Id" class="flex items-center gap-2" >
+                              ${row.id}
+                              <input type='checkbox' class=" data-checkbox" id=${row.id} ></input>
+                            </td>
                             <td>${row.product_name}</td>
                             <td>${row.product_code}</td>
                             <td>${row.barcode}</td>
@@ -29,6 +32,8 @@ const loadProduct = () => {
                                 </button>
                                 <button
                                     class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-error"
+                                    onclick="deleteAction(${row.id}, '${row.product_name}')"
+                                    id="delete-data"
                                 >
                                     <i class="fa fa-trash"></i>
                                 </button>
@@ -167,5 +172,50 @@ const insertProduct = () => {
       });
       //
     });
+  }
+};
+
+const loadCategoryOption = () => {
+  const queryGetAllCategories = "select * from category order by id desc";
+  db.all(queryGetAllCategories, (err, rows) => {
+    if (err) throw err;
+    let option = "<option selected disabled>Category</option>";
+    rows.map((row) => {
+      option += `<option>${row.category}</option>`;
+    });
+    $("#product-category").html(option);
+  });
+};
+
+const loadUnitOption = () => {
+  const queryGetAllUnits = "select * from unit order by id desc";
+  db.all(queryGetAllUnits, (err, rows) => {
+    if (err) throw err;
+    let option = " <option selected disabled>Unit</option>";
+    rows.map((row) => {
+      option += `<option>${row.unit}</option>`;
+    });
+    $("#product-unit").html(option);
+  });
+};
+
+const deleteAction = (id = null, producName = null) => {
+  const message = `Are you sure, you want to delete data with id: ${id} product name: ${producName}`;
+
+  if (id) {
+    let dialogBox = dialog.showMessageBoxSync({
+      title: "Delete record",
+      type: "question",
+      buttons: ["Yes", "No"],
+      defaultId: 0,
+      message,
+      detail: "This action cannot be undone.",
+    });
+    if (dialogBox === 1) {
+      $("input.data-checkbox").prop("checked", false);
+      $("tbody#data tr").removeClass("blocked");
+    } else {
+      deleteRecord(id);
+    }
   }
 };
