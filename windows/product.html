@@ -109,7 +109,9 @@
         tabindex="0"
         role="button"
         class="border rounded-sm btn btn-xs btn-outline border-slate-400"
-        title="Check"
+        title="Select all data"
+        id="select-all"
+        onclick="selectAll()"
       >
         <i class="fa-solid fa-check"></i>
       </div>
@@ -117,7 +119,9 @@
         tabindex="0"
         role="button"
         class="border rounded-sm btn btn-xs btn-outline border-slate-400"
-        title="Cancel"
+        title="Unselect all data"
+        id="unselect-all"
+        onclick="unSelectAll()"
       >
         <i class="fa-solid fa-times"></i>
       </div>
@@ -276,7 +280,7 @@
                 <th>Action</th>
               </tr>
             </thead>
-            <tbody id="data"></tbody>
+            <tbody id="data" class="cursor-pointer"></tbody>
           </table>
         </div>
       </div>

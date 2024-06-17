@@ -35,6 +35,31 @@ const deleteRecord = (id) => {
   });
 };
 
+const deleteAllRecords = () => {
+  let table;
+  switch (docId) {
+    case "product-data":
+      table = `product`;
+      break;
+  }
+  const queryDeleteAll = `delete from ${table}`;
+
+  db.run(queryDeleteAll, (err) => {
+    if (err) {
+      console.log(err);
+      throw err;
+    } else {
+      dialog.showMessageBoxSync({
+        title: "Alert",
+        message: "Deleted",
+        type: "info",
+        buttons: ["OK"],
+      });
+      loadData();
+    }
+  });
+};
+
 const deleteMultipleRecords = (ids) => {
   let table;
   switch (docId) {
@@ -59,3 +84,10 @@ const deleteMultipleRecords = (ids) => {
     }
   });
 };
+
+//checkbox checked
+$("tbody#data").on("click", "tr", function () {
+  let dataId = $(this).attr("data-id");
+  let checkbox = $("input[type='checkbox']#" + dataId);
+  checkbox.prop("checked", !checkbox.prop("checked"));
+});

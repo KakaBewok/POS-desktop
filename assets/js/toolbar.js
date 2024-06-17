@@ -13,8 +13,7 @@ const closeFormAddData = () => {
 
 const deleteAction = (id = null, producName = null) => {
   const messageDeleteOne = `Are you sure, you want to delete data "${producName}" ?`;
-  const messageDeleteAll = `ATTENTION. You did not select any record. If no record selected, you WILL DELETE ALL RECORDS in the table! Are you sure you want to delete all records ?`;
-  const messageDeleteMany = `Are you sure you want to delete the selected records ?`;
+  const messageDeleteAll = `You did not select any record. If no record selected, you WILL DELETE ALL RECORDS in the table! Are you sure you want to delete all records ?`;
 
   if (id) {
     let dialogBox = dialog.showMessageBoxSync({
@@ -59,7 +58,7 @@ const deleteAction = (id = null, producName = null) => {
         type: "question",
         buttons: ["Yes", "No"],
         defaultId: 0,
-        message: messageDeleteMany,
+        message: `Are you sure you want to delete ${arrayIds.length} selected records ?`,
         detail: "This action cannot be undone.",
       });
       if (dialogBox === 1) {
@@ -72,4 +71,12 @@ const deleteAction = (id = null, producName = null) => {
       }
     }
   }
+};
+
+const selectAll = () => {
+  $("input.data-checkbox").prop("checked", true);
+};
+
+const unSelectAll = () => {
+  $("input.data-checkbox").prop("checked", false);
 };
