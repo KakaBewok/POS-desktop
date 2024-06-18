@@ -13,20 +13,19 @@ const closeFormAddData = () => {
 
 const deleteAction = (id = null, producName = null) => {
   const messageDeleteOne = `Are you sure, you want to delete data "${producName}" ?`;
-  const messageDeleteAll = `You did not select any record. If no record selected, you WILL DELETE ALL RECORDS in the table! Are you sure you want to delete all records ?`;
+  const messageDeleteAll = `Are you sure you want to delete all records ?`;
 
   if (id) {
     let dialogBox = dialog.showMessageBoxSync({
       title: "Delete record",
       type: "question",
       buttons: ["Yes", "No"],
-      defaultId: 0,
+      defaultId: [0, 1],
       message: messageDeleteOne,
       detail: "This action cannot be undone.",
     });
     if (dialogBox === 1) {
-      $("input.data-checkbox").prop("checked", false);
-      $("tbody#data tr").removeClass("blocked");
+      $(`input.data-checkbox#${id}`).prop("checked", false);
     } else {
       deleteRecord(id);
     }
@@ -39,7 +38,7 @@ const deleteAction = (id = null, producName = null) => {
 
     if (arrayIds.length < 1) {
       let dialogBox = dialog.showMessageBoxSync({
-        title: "Delete many records",
+        title: "Delete all records",
         type: "question",
         buttons: ["Yes", "No"],
         defaultId: 1,
@@ -48,7 +47,7 @@ const deleteAction = (id = null, producName = null) => {
       });
 
       if (dialogBox === 1) {
-        console.log("No.");
+        $(`input.data-checkbox`).prop("checked", false);
       } else {
         deleteAllRecords();
       }
@@ -62,9 +61,7 @@ const deleteAction = (id = null, producName = null) => {
         detail: "This action cannot be undone.",
       });
       if (dialogBox === 1) {
-        console.log("No.");
         $("input.data-checkbox").prop("checked", false);
-        // $("tbody#data tr").removeClass("blocked");
       } else {
         const joinArrayIds = arrayIds.join(", ");
         deleteMultipleRecords(joinArrayIds);
@@ -75,8 +72,10 @@ const deleteAction = (id = null, producName = null) => {
 
 const selectAll = () => {
   $("input.data-checkbox").prop("checked", true);
+  $("tbody#data tr").addClass("bg-red-500");
 };
 
 const unSelectAll = () => {
   $("input.data-checkbox").prop("checked", false);
+  $("tbody#data tr").removeClass("hidden");
 };

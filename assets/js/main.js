@@ -86,8 +86,13 @@ const deleteMultipleRecords = (ids) => {
 };
 
 //checkbox checked
-$("tbody#data").on("click", "tr", function () {
-  let dataId = $(this).attr("data-id");
-  let checkbox = $("input[type='checkbox']#" + dataId);
-  checkbox.prop("checked", !checkbox.prop("checked"));
+$("tbody#data").on("click", "tr", function (event) {
+  if (
+    !$(event.target).is("button") &&
+    !$(event.target).closest("button").length
+  ) {
+    let dataId = $(this).attr("data-id");
+    let checkbox = $("input[type='checkbox']#" + dataId);
+    checkbox.prop("checked", !checkbox.prop("checked"));
+  }
 });
