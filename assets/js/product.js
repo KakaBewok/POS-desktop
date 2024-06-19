@@ -14,7 +14,7 @@ const loadProduct = () => {
                         <tr data-id=${row.id} >
                             <td data-colname="Id" class="flex items-center gap-2" >
                               ${row.id}
-                              <input type='checkbox' class="hidden data-checkbox" id=${row.id}></input>
+                              <input type='checkbox' class=" data-checkbox" id=${row.id}></input>
                             </td>
                             <td>${row.product_name}</td>
                             <td>${row.product_code}</td>

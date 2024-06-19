@@ -47,7 +47,7 @@ const deleteAction = (id = null, producName = null) => {
       });
 
       if (dialogBox === 1) {
-        $(`input.data-checkbox`).prop("checked", false);
+        unSelectAll();
       } else {
         deleteAllRecords();
       }
@@ -61,7 +61,7 @@ const deleteAction = (id = null, producName = null) => {
         detail: "This action cannot be undone.",
       });
       if (dialogBox === 1) {
-        $("input.data-checkbox").prop("checked", false);
+        unSelectAll();
       } else {
         const joinArrayIds = arrayIds.join(", ");
         deleteMultipleRecords(joinArrayIds);
@@ -72,10 +72,10 @@ const deleteAction = (id = null, producName = null) => {
 
 const selectAll = () => {
   $("input.data-checkbox").prop("checked", true);
-  $("tbody#data tr").addClass("bg-red-500");
+  $("tbody#data tr").addClass("bg-slate-900 text-white");
 };
 
 const unSelectAll = () => {
   $("input.data-checkbox").prop("checked", false);
-  $("tbody#data tr").removeClass("hidden");
+  $("tbody#data tr").removeClass("bg-slate-900 text-white");
 };

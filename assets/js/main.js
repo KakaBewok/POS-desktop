@@ -102,5 +102,9 @@ $("tbody#data").on("click", "tr", function (event) {
     let dataId = $(this).attr("data-id");
     let checkbox = $("input[type='checkbox']#" + dataId);
     checkbox.prop("checked", !checkbox.prop("checked"));
+
+    checkbox.prop("checked")
+      ? $(this).addClass("bg-slate-900 text-white")
+      : $(this).removeClass("bg-slate-900 text-white");
   }
 });
