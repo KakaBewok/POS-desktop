@@ -85,6 +85,14 @@ const deleteMultipleRecords = (ids) => {
   });
 };
 
+const editRecord = (id) => {
+  switch (docId) {
+    case "product-data":
+      editProduct(id);
+      break;
+  }
+};
+
 //checkbox checked
 $("tbody#data").on("click", "tr", function (event) {
   if (

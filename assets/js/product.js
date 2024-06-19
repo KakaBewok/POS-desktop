@@ -27,6 +27,8 @@ const loadProduct = () => {
                             <td>
                                 <button
                                     class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-accent"
+                                    onclick="editRecord(${row.id})"
+                                    id="edit-data"
                                 >
                                     <i class="fa fa-edit"></i>
                                 </button>
@@ -197,4 +199,10 @@ const loadUnitOption = () => {
     });
     $("#product-unit").html(option);
   });
+};
+
+const editProduct = (id) => {
+  const sqlUnits = `SELECT * FROM unit`;
+  const sqlCategories = `SELECT * FROM category`;
+  const sqlProductEdit = `SELECT * FROM product WHERE id = ${id}`;
 };
