@@ -56,7 +56,7 @@ const productWin = () => {
     height,
     title: "My POS | Product",
   });
-  productWindow.webContents.openDevTools();
+  // productWindow.webContents.openDevTools();
   productWindow.loadFile("windows/product.html");
 
   remote.enable(productWindow.webContents);
