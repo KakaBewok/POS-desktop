@@ -205,4 +205,29 @@ const editProduct = (id) => {
   const sqlUnits = `SELECT * FROM unit`;
   const sqlCategories = `SELECT * FROM category`;
   const sqlProductEdit = `SELECT * FROM product WHERE id = ${id}`;
+
+  db.all(sqlUnits, (err, rows) => {
+    if (err) throw err;
+    let option = " <option selected disabled>Unit</option>";
+    rows.map((row) => {
+      option += `<option>${row.unit}</option>`;
+    });
+
+    db.all(sqlCategories, (err, rows) => {
+      if (err) throw err;
+      let option = " <option selected disabled>Category</option>";
+      rows.map((row) => {
+        option += `<option>${row.unit}</option>`;
+      });
+
+      db.all(sqlProductEdit, (err, rows) => {
+        if (err) throw err;
+
+        let row = rows[0];
+        let editForm = `
+                        <div></div>
+                        `;
+      });
+    });
+  });
 };
