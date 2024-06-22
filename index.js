@@ -6,6 +6,7 @@ remote.initialize();
 
 let mainWindow;
 let productWindow;
+let editDataModal;
 
 const mainWin = () => {
   mainWindow = new BrowserWindow({
@@ -69,7 +70,32 @@ const productWin = () => {
   });
 };
 
-const editData = () => {};
+const editData = (docId, editForm, width, height, rowId) => {
+  let parentWin;
+  switch (docId) {
+    case "product-data":
+      parentWin = productWindow;
+  }
+
+  editDataModal = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+    autoHideMenuBar: true,
+    width,
+    height,
+    resizable: false,
+    maximizable: false,
+    minimizable: false,
+    parent: parentWin,
+    title: "Edit product data",
+  });
+  editDataModal.loadFile("modals/edit-data.html");
+  editDataModal.webContents.on("did-finish-load", () => {
+    editDataModal.webContents.send("res:form", docId, editForm, rowId);
+  });
+};
 
 ipcMain.on("load:edit", (event, docId, editForm, width, height, rowId) => {
   editData(docId, editForm, width, height, rowId);
