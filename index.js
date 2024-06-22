@@ -68,3 +68,9 @@ const productWin = () => {
     mainWindow.show();
   });
 };
+
+const editData = () => {};
+
+ipcMain.on("load:edit", (event, docId, editForm, width, height, rowId) => {
+  editData(docId, editForm, width, height, rowId);
+});

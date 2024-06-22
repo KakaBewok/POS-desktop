@@ -225,8 +225,35 @@ const editProduct = (id) => {
 
         let row = rows[0];
         let editForm = `
-                        <div></div>
+                        <div>
+                           <input
+                              type="text"
+                              placeholder="Product name"
+                              class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
+                              id="edit-product-name"
+                              value=${row.productName}
+                              required
+                            />
+                            <input
+                              type="hidden"
+                              placeholder="Prev. product name"
+                              class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
+                              id="prev-product-name"
+                              value=${row.productName}
+                              required
+                            />
+                            <input
+                              type="hidden"
+                              placeholder="Id"
+                              class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
+                              id="row-id"
+                              value=${id}
+                              required
+                            />
+                        </div>
                         `;
+
+        ipcRenderer.send("load:edit", "product-data", editForm, 300, 450, id);
       });
     });
   });
