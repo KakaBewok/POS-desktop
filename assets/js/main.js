@@ -104,7 +104,7 @@ $("tbody#data").on("click", "tr", function (event) {
     checkbox.prop("checked", !checkbox.prop("checked"));
 
     checkbox.prop("checked")
-      ? $(this).addClass("bg-slate-500 text-white")
-      : $(this).removeClass("bg-slate-500 text-white");
+      ? $(this).addClass("bg-cyan-600 text-white")
+      : $(this).removeClass("bg-cyan-600 text-white");
   }
 });

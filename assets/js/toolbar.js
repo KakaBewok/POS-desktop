@@ -72,10 +72,10 @@ const deleteAction = (id = null, producName = null) => {
 
 const selectAll = () => {
   $("input.data-checkbox").prop("checked", true);
-  $("tbody#data tr").addClass("bg-slate-500 text-white");
+  $("tbody#data tr").addClass("bg-cyan-600 text-white");
 };
 
 const unSelectAll = () => {
   $("input.data-checkbox").prop("checked", false);
-  $("tbody#data tr").removeClass("bg-slate-500 text-white");
+  $("tbody#data tr").removeClass("bg-cyan-600 text-white");
 };
