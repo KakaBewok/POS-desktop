@@ -91,9 +91,14 @@ const editData = (docId, editForm, width, height, rowId) => {
     parent: parentWin,
     title: "Edit product data",
   });
+  remote.enable(editDataModal.webContents);
+  // editDataModal.webContents.openDevTools();
   editDataModal.loadFile("modals/edit-data.html");
   editDataModal.webContents.on("did-finish-load", () => {
     editDataModal.webContents.send("res:form", docId, editForm, rowId);
+  });
+  editDataModal.on("close", () => {
+    editDataModal = null;
   });
 };
 

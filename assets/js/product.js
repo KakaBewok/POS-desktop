@@ -223,6 +223,8 @@ const editProduct = (id) => {
       db.all(sqlProductEdit, (err, rows) => {
         if (err) throw err;
 
+        console.log(rows);
+
         let row = rows[0];
         let editForm = `
                         <div>
@@ -231,7 +233,7 @@ const editProduct = (id) => {
                               placeholder="Product name"
                               class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
                               id="edit-product-name"
-                              value=${row.productName}
+                              value=${row.product_name}
                               required
                             />
                             <input
@@ -239,7 +241,7 @@ const editProduct = (id) => {
                               placeholder="Prev. product name"
                               class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
                               id="prev-product-name"
-                              value=${row.productName}
+                              value=${row.product_name}
                               required
                             />
                             <input
