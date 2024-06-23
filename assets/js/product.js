@@ -336,7 +336,7 @@ const editProduct = (id) => {
                           <button
                             class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-accent"
                             id="btn-submit-edit"
-                            onclick="submitEditProductData(${id})"
+                            onclick="submitEditData(${id})"
                           >
                             Submit
                           </button>
@@ -349,7 +349,3 @@ const editProduct = (id) => {
     });
   });
 };
-
-{
-  /* <div class="py-3 w-full"></div> */
-}

@@ -1,0 +1,1 @@
+const submitEditProductData = (id) => {};
