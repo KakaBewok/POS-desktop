@@ -201,6 +201,22 @@ const loadUnitOption = () => {
   });
 };
 
+const selectUnitOption = (unitOption, selectedUnit) => {
+  let options = unitOption.replace(
+    `<option>${selectedUnit}</option>`,
+    `<option selected>${selectedUnit}</option>`
+  );
+  return options;
+};
+
+const selectCategoryOption = (categoryOption, selectedCategory) => {
+  let options = categoryOption.replace(
+    `<option>${selectedCategory}</option>`,
+    `<option selected>${selectedCategory}</option>`
+  );
+  return options;
+};
+
 const editProduct = (id) => {
   const sqlUnits = `SELECT * FROM unit`;
   const sqlCategories = `SELECT * FROM category`;
@@ -208,51 +224,124 @@ const editProduct = (id) => {
 
   db.all(sqlUnits, (err, rows) => {
     if (err) throw err;
-    let option = " <option selected disabled>Unit</option>";
+    let unitOption = "";
     rows.map((row) => {
-      option += `<option>${row.unit}</option>`;
+      unitOption += `<option>${row.unit}</option>`;
     });
 
     db.all(sqlCategories, (err, rows) => {
       if (err) throw err;
-      let option = " <option selected disabled>Category</option>";
+      let categoryOption = "";
       rows.map((row) => {
-        option += `<option>${row.unit}</option>`;
+        categoryOption += `<option>${row.category}</option>`;
       });
 
       db.all(sqlProductEdit, (err, rows) => {
         if (err) throw err;
 
-        console.log(rows);
-
         let row = rows[0];
         let editForm = `
+                      <div class="flex flex-col gap-2" >
                         <div>
                            <input
                               type="text"
-                              placeholder="Product name"
-                              class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
+                              class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-100"
                               id="edit-product-name"
                               value=${row.product_name}
                               required
                             />
                             <input
                               type="hidden"
-                              placeholder="Prev. product name"
-                              class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
+                              class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
                               id="prev-product-name"
                               value=${row.product_name}
                               required
                             />
                             <input
                               type="hidden"
-                              placeholder="Id"
-                              class="max-w-xs rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
+                              class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
                               id="row-id"
                               value=${id}
                               required
                             />
                         </div>
+                        <div>
+                           <input
+                              type="text"
+                              placeholder="Barcode"
+                              class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-100"
+                              id="edit-barcode"
+                              value=${row.barcode}
+                              required
+                            />
+                            <input
+                              type="hidden"
+                              placeholder="Barcode"
+                              class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
+                              id="prev-barcode"
+                              value=${row.barcode}
+                              required
+                            />
+                        </div>
+                        <div>
+                          <select
+                            class="rounded-sm w-full select select-xs select-bordered border-slate-400"
+                            id="edit-product-category"
+                          >
+                            ${selectCategoryOption(
+                              categoryOption,
+                              row.category
+                            )}
+                          </select>
+                        </div>
+                        <div>
+                          <select
+                            class="rounded-sm w-full select select-xs select-bordered border-slate-400"
+                            id="edit-product-unit"
+                          >
+                            ${selectUnitOption(unitOption, row.unit)}
+                          </select>
+                        </div>
+                        <div>
+                           <input
+                              type="text"
+                              placeholder="Seling price"
+                              class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-100"
+                              id="edit-selling-price"
+                              value=${row.selling_price}
+                              required
+                            />
+                        </div>
+                        <div>
+                           <input
+                              type="text"
+                              placeholder="Product cost"
+                              class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-100"
+                              id="edit-product-cost"
+                              value=${row.cost_of_product}
+                              required
+                            />
+                        </div>
+                        <div>
+                           <input
+                              type="text"
+                              placeholder="Product quantity"
+                              class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-100 mb-3"
+                              id="edit-product-initial-qty"
+                              value=${row.product_initial_qty}
+                              required
+                            />
+                        </div>
+                        
+                          <button
+                            class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-accent"
+                            id="btn-submit-edit"
+                            onclick="submitEditProductData(${id})"
+                          >
+                            Submit
+                          </button>
+                        
+                      </div>
                         `;
 
         ipcRenderer.send("load:edit", "product-data", editForm, 300, 450, id);
@@ -260,3 +349,7 @@ const editProduct = (id) => {
     });
   });
 };
+
+{
+  /* <div class="py-3 w-full"></div> */
+}
