@@ -82,7 +82,7 @@ const insertProduct = () => {
       title: "Alert",
       type: "info",
       message:
-        "Product name, product price, product cost and unit must be filled in.",
+        "Product name, product price, product cost and unit are required.",
     });
   } else if (
     parseInt(inputProductPrice.unmaskedValue) <
