@@ -1,4 +1,4 @@
-const submitEditProductData = (id) => {
+const submitEditProductData = (rowId) => {
   let productName = $("#edit-form").find("#edit-product-name").val();
   let prevProductName = $("#edit-form").find("#prev-product-name").val();
   let barcode = $("#edit-form").find("#edit-barcode").val();
@@ -19,10 +19,60 @@ const submitEditProductData = (id) => {
   } else {
     if (productName === prevProductName) {
       if (barcode === "" || barcode === prevBarcode) {
-        executeEditProductData(id);
+        executeEditProductData(rowId);
       } else {
-        const sql = `select count(*) as count from product where barcode = ${barcode}`;
+        const query = `select count(*) as count from product where barcode = ${barcode}`;
+        db.all(query, (err, row) => {
+          if (err) throw err;
+
+          const rowNumber = row[0].count;
+          if (rowNumber < 1) {
+            executeEditProductData(rowId);
+          } else {
+            dialog.showMessageBoxSync({
+              title: "Alert",
+              type: "info",
+              message: `Barcode ${barcode} already exist!`,
+            });
+          }
+        });
       }
+    } else {
+      const query = `select count(*) as count from product where product_name = ${productName}`;
+      db.all(query, (err, row) => {
+        if (err) console.log(err);
+
+        const rowNumber = row[0].count;
+        if (rowNumber < 1) {
+          if (barcode === "" || barcode === prevBarcode) {
+            executeEditProductData(rowId);
+          } else {
+            const query = `select count(*) as count from product where barcode = ${barcode}`;
+            db.all(query, (err, row) => {
+              if (err) throw err;
+
+              const rowNumber = row[0].count;
+              if (rowNumber < 1) {
+                executeEditProductData(rowId);
+              } else {
+                dialog.showMessageBoxSync({
+                  title: "Alert",
+                  type: "info",
+                  message: `Barcode ${barcode} already exist!`,
+                });
+              }
+            });
+          }
+        } else {
+          dialog.showMessageBoxSync({
+            title: "Alert",
+            type: "info",
+            message: `${productName} already exist!`,
+          });
+        }
+      });
     }
   }
 };
+
+const executeEditProductData = (rowId) => {};
