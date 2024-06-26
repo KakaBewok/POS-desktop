@@ -75,4 +75,46 @@ const submitEditProductData = (rowId) => {
   }
 };
 
-const executeEditProductData = (rowId) => {};
+const executeEditProductData = (rowId) => {
+  let productName = $("#edit-form").find("#edit-product-name").val();
+  let barcode = $("#edit-form").find("#edit-barcode").val();
+  let category = $("#edit-form").find("#edit-product-category").val();
+  let sellingPrice = $("#edit-form").find("#edit-selling-price").val();
+  let productCost = $("#edit-form").find("#edit-product-cost").val();
+  let productInitialQty = $("#edit-form")
+    .find("#edit-product-initial-qty")
+    .val();
+  let unit = $("#edit-form").find("#edit-product-unit").val();
+
+  if (sellingPrice === "") {
+    dialog.showMessageBoxSync({
+      title: "Alert",
+      type: "info",
+      message: `Selling price is required!`,
+    });
+  } else if (productCost === "") {
+    dialog.showMessageBoxSync({
+      title: "Alert",
+      type: "info",
+      message: `Product cost is required!`,
+    });
+  } else if (sellingPrice < productCost>) {
+    dialog.showMessageBoxSync({
+      title: "Alert",
+      type: "info",
+      message: `Product price must be greater than product cost!`,
+    });
+  } else {
+    const query = `update 
+                    product'
+                  set 
+                    product_name = '?' ,
+                    barcode = '?',
+                    barcode = '?',
+                    barcode = '?',
+                    barcode = '?',
+                    barcode = '?',
+                    barcode = '?',`
+
+  }
+};
