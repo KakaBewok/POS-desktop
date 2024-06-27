@@ -108,3 +108,7 @@ $("tbody#data").on("click", "tr", function (event) {
       : $(this).removeClass("bg-cyan-600 text-white");
   }
 });
+
+const alertSuccess = (message) => {
+  let div = "";
+};

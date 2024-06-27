@@ -98,7 +98,7 @@ const executeEditProductData = (rowId) => {
       type: "info",
       message: `Product cost is required!`,
     });
-  } else if (sellingPrice < productCost>) {
+  } else if (sellingPrice < productCost) {
     dialog.showMessageBoxSync({
       title: "Alert",
       type: "info",
@@ -106,15 +106,36 @@ const executeEditProductData = (rowId) => {
     });
   } else {
     const query = `update 
-                    product'
+                    product
                   set 
                     product_name = '?' ,
                     barcode = '?',
-                    barcode = '?',
-                    barcode = '?',
-                    barcode = '?',
-                    barcode = '?',
-                    barcode = '?',`
+                    category = '?',
+                    selling_price = '?',
+                    cost_of_product = '?',
+                    product_initial_qty = '?',
+                    unit = '?'
+                  where
+                    id = ${rowId}`;
 
+    db.serialize(() => {
+      db.run(
+        sql,
+        [
+          productName,
+          barcode,
+          category,
+          sellingPrice,
+          productCost,
+          productInitialQty,
+          unit,
+        ],
+        (err) => {
+          if (err) throw err;
+
+          ipcRenderer.send("update:success", "product-data");
+        }
+      );
+    });
   }
 };

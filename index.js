@@ -105,3 +105,11 @@ const editData = (docId, editForm, width, height, rowId) => {
 ipcMain.on("load:edit", (event, docId, editForm, width, height, rowId) => {
   editData(docId, editForm, width, height, rowId);
 });
+
+ipcMain.on("update:success", (e, docId) => {
+  switch (docId) {
+    case "product-data":
+      productWin.webContents.send("update:success", "Successfully update");
+  }
+  editDataModal.close();
+});

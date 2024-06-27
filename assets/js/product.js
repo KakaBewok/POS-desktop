@@ -1,3 +1,5 @@
+const { ipcRenderer } = require("electron/renderer");
+
 const loadProduct = () => {
   const query = `SELECT * FROM product`;
 
@@ -349,3 +351,8 @@ const editProduct = (id) => {
     });
   });
 };
+
+ipcRenderer.on("update:success", (e, message) => {
+  alertSuccess(message);
+  loadData();
+});
