@@ -1,5 +1,3 @@
-const { ipcRenderer } = require("electron/renderer");
-
 const loadProduct = () => {
   const query = `SELECT * FROM product`;
 

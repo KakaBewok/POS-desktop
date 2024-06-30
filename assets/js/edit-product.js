@@ -21,7 +21,7 @@ const submitEditProductData = (rowId) => {
       if (barcode === "" || barcode === prevBarcode) {
         executeEditProductData(rowId);
       } else {
-        const query = `select count(*) as count from product where barcode = ${barcode}`;
+        const query = `select count(*) as count from product where barcode = '${barcode}'`;
         db.all(query, (err, row) => {
           if (err) throw err;
 
@@ -38,16 +38,18 @@ const submitEditProductData = (rowId) => {
         });
       }
     } else {
-      const query = `select count(*) as count from product where product_name = ${productName}`;
-      db.all(query, (err, row) => {
+      const query = `select count(*) as count from product where product_name = '${productName}'`;
+      db.all(query, (err, rows) => {
         if (err) console.log(err);
 
-        const rowNumber = row[0].count;
+        console.log(rows);
+
+        const rowNumber = rows[0].count;
         if (rowNumber < 1) {
           if (barcode === "" || barcode === prevBarcode) {
             executeEditProductData(rowId);
           } else {
-            const query = `select count(*) as count from product where barcode = ${barcode}`;
+            const query = `select count(*) as count from product where barcode = '${barcode}'`;
             db.all(query, (err, row) => {
               if (err) throw err;
 
@@ -108,19 +110,19 @@ const executeEditProductData = (rowId) => {
     const query = `update 
                     product
                   set 
-                    product_name = '?' ,
-                    barcode = '?',
-                    category = '?',
-                    selling_price = '?',
-                    cost_of_product = '?',
-                    product_initial_qty = '?',
-                    unit = '?'
+                    product_name = ?,
+                    barcode = ?,
+                    category = ?,
+                    selling_price = ?,
+                    cost_of_product = ?,
+                    product_initial_qty = ?,
+                    unit = ?
                   where
-                    id = ${rowId}`;
+                    id = ?`;
 
     db.serialize(() => {
       db.run(
-        sql,
+        query,
         [
           productName,
           barcode,
@@ -129,6 +131,7 @@ const executeEditProductData = (rowId) => {
           productCost,
           productInitialQty,
           unit,
+          rowId,
         ],
         (err) => {
           if (err) throw err;
