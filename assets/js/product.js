@@ -248,7 +248,7 @@ const editProduct = (id) => {
                               type="text"
                               class="rounded-sm input-xs input input-bordered border-slate-400 text-slate-100 w-2/3"
                               id="edit-product-name"
-                              value=${row.product_name}
+                              value="${row.product_name}"
                               required
                             />
                             <input
