@@ -88,7 +88,7 @@ const executeEditProductData = (rowId) => {
     .val();
   let unit = $("#edit-form").find("#edit-product-unit").val();
 
-  if (sellingPrice < productCost) {
+  if (parseInt(sellingPrice) < parseInt(productCost)) {
     dialog.showMessageBoxSync({
       title: "Alert",
       type: "info",

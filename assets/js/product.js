@@ -242,10 +242,11 @@ const editProduct = (id) => {
         let row = rows[0];
         let editForm = `
                       <div class="flex flex-col gap-2" >
-                        <div>
+                        <div class="flex gap-2">
+                           <label for="edit-product-name" class="text-slate-200 text-sm font-normal w-1/3">Name</label>
                            <input
                               type="text"
-                              class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-100"
+                              class="rounded-sm input-xs input input-bordered border-slate-400 text-slate-100 w-2/3"
                               id="edit-product-name"
                               value=${row.product_name}
                               required
@@ -265,25 +266,25 @@ const editProduct = (id) => {
                               required
                             />
                         </div>
-                        <div>
+                        <div class="flex gap-2">
+                           <label for="edit-barcode" class="text-slate-200 text-sm font-normal w-1/3">Barcode</label>
                            <input
                               type="text"
-                              placeholder="Barcode"
-                              class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-100"
+                              class="w-2/3 rounded-sm input-xs input input-bordered border-slate-400 text-slate-100"
                               id="edit-barcode"
                               value=${row.barcode}
                             />
                             <input
                               type="hidden"
-                              placeholder="Barcode"
                               class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
                               id="prev-barcode"
                               value=${row.barcode}
                             />
                         </div>
-                        <div>
+                        <div class="flex gap-2">
+                         <label for="edit-product-category" class="text-slate-200 text-sm font-normal w-1/3">Category</label>
                           <select
-                            class="rounded-sm w-full select select-xs select-bordered border-slate-400"
+                            class="rounded-sm w-2/3 select select-xs select-bordered border-slate-400"
                             id="edit-product-category"
                           >
                             ${selectCategoryOption(
@@ -292,46 +293,47 @@ const editProduct = (id) => {
                             )}
                           </select>
                         </div>
-                        <div>
+                        <div class="flex gap-2">
+                         <label for="edit-product-unit" class="text-slate-200 text-sm font-normal w-1/3">Unit</label>
                           <select
-                            class="rounded-sm w-full select select-xs select-bordered border-slate-400"
+                            class="rounded-sm w-2/3 select select-xs select-bordered border-slate-400"
                             id="edit-product-unit"
                           >
                             ${selectUnitOption(unitOption, row.unit)}
                           </select>
                         </div>
-                        <div>
+                        <div class="flex gap-2">
+                         <label for="edit-selling-price" class="text-slate-200 text-sm font-normal w-1/3">Selling price</label>
                            <input
                               type="text"
-                              placeholder="Seling price"
-                              class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-100"
+                              class="w-2/3 rounded-sm input-xs input input-bordered border-slate-400 text-slate-100"
                               id="edit-selling-price"
                               value=${row.selling_price}
                               required
                             />
                         </div>
-                        <div>
+                        <div class="flex gap-2">
+                         <label for="edit-product-cost" class="text-slate-200 text-sm font-normal w-1/3">Product cost</label>
                            <input
                               type="text"
-                              placeholder="Product cost"
-                              class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-100"
+                              class="w-2/3 rounded-sm input-xs input input-bordered border-slate-400 text-slate-100"
                               id="edit-product-cost"
                               value=${row.cost_of_product}
                               required
                             />
                         </div>
-                        <div>
+                        <div class="flex gap-2">
+                         <label for="edit-product-initial-qty" class="text-slate-200 text-sm font-normal w-1/3">Quantity</label>
                            <input
                               type="text"
-                              placeholder="Product quantity"
-                              class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-100 mb-3"
+                              class="rounded-sm input-xs input input-bordered border-slate-400 text-slate-100 mb-3 w-2/3"
                               id="edit-product-initial-qty"
                               value=${row.product_initial_qty}
                             />
                         </div>
                         
                           <button
-                            class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-xs btn-accent"
+                            class="px-3 py-1 text-xs font-medium text-white rounded-sm btn btn-sm btn-accent"
                             id="btn-submit-edit"
                             onclick="submitEditData(${id})"
                           >
@@ -341,7 +343,7 @@ const editProduct = (id) => {
                       </div>
                         `;
 
-        ipcRenderer.send("load:edit", "product-data", editForm, 300, 450, id);
+        ipcRenderer.send("load:edit", "product-data", editForm, 450, 400, id);
       });
     });
   });
