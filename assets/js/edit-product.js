@@ -88,19 +88,7 @@ const executeEditProductData = (rowId) => {
     .val();
   let unit = $("#edit-form").find("#edit-product-unit").val();
 
-  if (sellingPrice === "") {
-    dialog.showMessageBoxSync({
-      title: "Alert",
-      type: "info",
-      message: `Selling price is required!`,
-    });
-  } else if (productCost === "") {
-    dialog.showMessageBoxSync({
-      title: "Alert",
-      type: "info",
-      message: `Product cost is required!`,
-    });
-  } else if (sellingPrice < productCost) {
+  if (sellingPrice < productCost) {
     dialog.showMessageBoxSync({
       title: "Alert",
       type: "info",
@@ -125,11 +113,13 @@ const executeEditProductData = (rowId) => {
         query,
         [
           productName,
-          barcode,
+          barcode === "" || barcode === " " ? "-" : barcode,
           category,
           sellingPrice,
           productCost,
-          productInitialQty,
+          productInitialQty === "" || productInitialQty === " "
+            ? "-"
+            : productInitialQty,
           unit,
           rowId,
         ],

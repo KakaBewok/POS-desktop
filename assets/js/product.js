@@ -272,7 +272,6 @@ const editProduct = (id) => {
                               class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-100"
                               id="edit-barcode"
                               value=${row.barcode}
-                              required
                             />
                             <input
                               type="hidden"
@@ -280,7 +279,6 @@ const editProduct = (id) => {
                               class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
                               id="prev-barcode"
                               value=${row.barcode}
-                              required
                             />
                         </div>
                         <div>
@@ -329,7 +327,6 @@ const editProduct = (id) => {
                               class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-100 mb-3"
                               id="edit-product-initial-qty"
                               value=${row.product_initial_qty}
-                              required
                             />
                         </div>
                         
