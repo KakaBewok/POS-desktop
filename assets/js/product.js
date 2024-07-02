@@ -240,6 +240,7 @@ const editProduct = (id) => {
         if (err) throw err;
 
         let row = rows[0];
+
         let editForm = `
                       <div class="flex flex-col gap-2" >
                         <div class="flex gap-2">
@@ -248,14 +249,14 @@ const editProduct = (id) => {
                               type="text"
                               class="rounded-sm input-xs input input-bordered border-slate-400 text-slate-100 w-2/3"
                               id="edit-product-name"
-                              value="${row.product_name}"
+                              value='${row.product_name}'
                               required
                             />
                             <input
                               type="hidden"
                               class="w-full rounded-sm input-xs input input-bordered border-slate-400 text-slate-700"
                               id="prev-product-name"
-                              value=${row.product_name}
+                              value='${row.product_name}'
                               required
                             />
                             <input
