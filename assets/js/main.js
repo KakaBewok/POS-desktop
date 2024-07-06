@@ -1,14 +1,25 @@
 let docId = $("body").attr("id");
 
-const loadData = () => {
+const totalPage = (totalRowDisplayed) => {
   switch (docId) {
     case "product-data":
-      loadProduct();
+      totalProductPage(totalRowDisplayed);
       break;
   }
 };
 
-loadData();
+const loadData = (pageNumber, rowPerPage) => {
+  switch (docId) {
+    case "product-data":
+      loadProduct(pageNumber, rowPerPage);
+      break;
+  }
+};
+
+let pageNumber = $("#page-number").val();
+let rowPerPage = $("#row-per-page").val();
+
+loadData(pageNumber, rowPerPage);
 
 const deleteRecord = (id) => {
   let table;

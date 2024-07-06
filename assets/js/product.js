@@ -1,6 +1,33 @@
-const loadProduct = () => {
-  const query = `SELECT * FROM product`;
+const totalProductPage = (totalRowDisplayed) => {
+  const query = `SELECT COUNT(*) as total_row from product`;
+  db.serialize(() => {
+    db.each(query, (err, result) => {
+      if (err) throw err;
 
+      let totalPage;
+      if (result.total_row % totalRowDisplayed == 0) {
+        totalPage = parseInt(result.total_row) / parseInt(totalRowDisplayed);
+      } else {
+        totalPage = parseInt(result.total_row / totalRowDisplayed) + 1;
+      }
+
+      $("#total-page").val(totalPage);
+    });
+  });
+};
+
+const loadProduct = (pageNumber, totalRowDisplayed) => {
+  let offsetNumber;
+
+  if (pageNumber < 2) {
+    offsetNumber = 0;
+  } else {
+    offsetNumber = (pageNumber - 1) * totalRowDisplayed;
+  }
+
+  totalPage(totalRowDisplayed);
+
+  const query = `SELECT * FROM product ORDER BY id DESC LIMIT ${offsetNumber}, ${totalRowDisplayed}`;
   db.serialize(() => {
     db.all(query, (err, rows) => {
       if (err) throw err;

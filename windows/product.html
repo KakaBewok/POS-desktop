@@ -127,15 +127,26 @@
       </div>
 
       <!-- select -->
-      <select
+      <!-- <select
         class="rounded-sm w-13 select select-xs select-bordered border-slate-400"
         id="row-per-page"
         title="Row/page"
       >
-        <option selected>10</option>
+        <option selected>2</option>
         <option>25</option>
         <option>50</option>
         <option>75</option>
+      </select> -->
+      <select
+        id="row-per-page"
+        name="row-per-page"
+        class="rounded-sm w-13 select select-xs select-bordered border-slate-400"
+      >
+        <option value="2">2</option>
+        <option value="4">4</option>
+        <option value="20">20</option>
+        <option value="25">25</option>
+        <option value="50">50</option>
       </select>
 
       <!-- search input -->
@@ -170,7 +181,7 @@
           type="text"
           class="font-medium text-center border-none w-9 text-slate-900"
           value="1"
-          id="number-page"
+          id="page-number"
           disabled
         />
         <input
