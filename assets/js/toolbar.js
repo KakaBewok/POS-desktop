@@ -83,24 +83,28 @@ const unSelectAll = () => {
 //pagiantion
 $("#first-page").click(function (e) {
   e.preventDefault();
+  let searchValue = $("#search-data").val();
   let totalRowDisplayed = $("#row-per-page").val();
   $("#page-number").val(1);
-  loadData(1, totalRowDisplayed);
+  loadData(1, totalRowDisplayed, searchValue);
 });
 $("#last-page").click(function (e) {
   e.preventDefault();
+  let searchValue = $("#search-data").val();
   let totalPage = $("#total-page").val();
   $("#page-number").val(totalPage);
   let totalRowDisplayed = $("#row-per-page").val();
-  loadData(totalPage, totalRowDisplayed);
+  loadData(totalPage, totalRowDisplayed, searchValue);
 });
 $("#page-number").keyup(function () {
   let pageNumber = $(this).val();
+  let searchValue = $("#search-data").val();
   let totalRowDisplayed = $("#row-per-page").val();
-  loadData(pageNumber, totalRowDisplayed);
+  loadData(pageNumber, totalRowDisplayed, searchValue);
 });
 $("#next-page").click(function (e) {
   e.preventDefault();
+  let searchValue = $("#search-data").val();
   let totalPage = $("#total-page").val();
   let inputPageNumber = $("#page-number").val();
   if (inputPageNumber == "") {
@@ -111,11 +115,12 @@ $("#next-page").click(function (e) {
   let totalRowDisplayed = $("#row-per-page").val();
   if (pageNumber < totalPage) {
     $("#page-number").val(pageNumber + 1);
-    loadData(pageNumber + 1, totalRowDisplayed);
+    loadData(pageNumber + 1, totalRowDisplayed, searchValue);
   }
 });
 $("#prev-page").click(function (e) {
   e.preventDefault();
+  let searchValue = $("#search-data").val();
 
   let inputPageNumber = $("#page-number").val();
   let pageNumber = parseInt(inputPageNumber);
@@ -123,19 +128,20 @@ $("#prev-page").click(function (e) {
   if (pageNumber > 1) {
     $("#page-number").val(pageNumber - 1);
     let totalRowDisplayed = $("#row-per-page").val();
-    loadData(pageNumber - 1, totalRowDisplayed);
+    loadData(pageNumber - 1, totalRowDisplayed, searchValue);
   }
 });
 $("#row-per-page").change(function () {
   let totalRowDisplayed = $(this).val();
   let pageNumber = $("#page-number").val();
   let totalPage = $("#total-page").val();
+  let searchValue = $("#search-data").val();
 
   if (pageNumber > totalPage) {
     pageNumber = 1;
     $("#page-number").val(1);
   }
-  loadData(pageNumber, totalRowDisplayed);
+  loadData(pageNumber, totalRowDisplayed, searchValue);
 });
 
 //search
@@ -150,5 +156,14 @@ const search = () => {
 $("#search-data").keydown(function (e) {
   if (e.keyCode == 13) {
     search();
+  }
+});
+$("#search-data").keyup(function (e) {
+  let searchValue = $(this).val();
+  let pageNumber = $("#page-number").val();
+  let rowPerPage = $("#row-per-page").val();
+
+  if (searchValue === "") {
+    loadData(pageNumber, rowPerPage);
   }
 });
