@@ -1,7 +1,7 @@
 const totalProductPage = (totalRowDisplayed, searchValue) => {
   let query;
   if (searchValue != "") {
-    query = `SELECT COUNT(*) as total_row FROM product WHERE product_name LIKE '${searchValue}' escape '!' OR product_code LIKE '${searchValue}' escape '!' OR barcode LIKE '${searchValue}' escape '!' OR category LIKE '${searchValue}' escape '!' OR selling_price LIKE '${searchValue}' escape '!' OR cost_of_product LIKE '${searchValue}' escape '!' OR product_initial_qty LIKE '${searchValue}' escape '!' OR unit LIKE '${searchValue}' escape '!' `;
+    query = `SELECT COUNT(*) as total_row FROM product WHERE product_name LIKE '%${searchValue}%' escape '!' OR product_code LIKE '%${searchValue}%' escape '!' OR barcode LIKE '%${searchValue}%' escape '!' OR category LIKE '%${searchValue}%' escape '!' OR selling_price LIKE '%${searchValue}%' escape '!' OR cost_of_product LIKE '%${searchValue}%' escape '!' OR product_initial_qty LIKE '%${searchValue}%' escape '!' OR unit LIKE '%${searchValue}%' escape '!' `;
   } else {
     query = `SELECT COUNT(*) as total_row from product`;
   }
@@ -36,7 +36,7 @@ const loadProduct = (pageNumber, totalRowDisplayed, searchValue) => {
 
   let query;
   if (searchValue != "") {
-    query = `SELECT * FROM product WHERE product_name LIKE '%${searchValue}%' escape '!' OR product_code LIKE '${searchValue}' escape '!' OR barcode LIKE '${searchValue}' escape '!' OR category LIKE '${searchValue}' escape '!' OR selling_price LIKE '${searchValue}' escape '!' OR cost_of_product LIKE '${searchValue}' escape '!' OR product_initial_qty LIKE '${searchValue}' escape '!' OR unit LIKE '${searchValue}' escape '!' ORDER BY id DESC LIMIT ${offsetNumber}, ${totalRowDisplayed} `;
+    query = `SELECT * FROM product WHERE product_name LIKE '%${searchValue}%' escape '!' OR product_code LIKE '%${searchValue}%' escape '!' OR barcode LIKE '%${searchValue}%' escape '!' OR category LIKE '%${searchValue}%' escape '!' OR selling_price LIKE '%${searchValue}%' escape '!' OR cost_of_product LIKE '%${searchValue}%' escape '!' OR product_initial_qty LIKE '%${searchValue}%' escape '!' OR unit LIKE '%${searchValue}%' escape '!' ORDER BY id DESC LIMIT ${offsetNumber}, ${totalRowDisplayed} `;
   } else {
     query = `SELECT * FROM product ORDER BY id DESC LIMIT ${offsetNumber}, ${totalRowDisplayed}`;
   }
