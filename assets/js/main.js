@@ -1,25 +1,25 @@
 let docId = $("body").attr("id");
 
-const totalPage = (totalRowDisplayed) => {
+const totalPage = (totalRowDisplayed, searchValue = "") => {
   switch (docId) {
     case "product-data":
-      totalProductPage(totalRowDisplayed);
+      totalProductPage(totalRowDisplayed, searchValue);
       break;
   }
 };
 
-const loadData = (pageNumber, rowPerPage) => {
+const loadData = (pageNumber, rowPerPage, searchValue = "") => {
   switch (docId) {
     case "product-data":
-      loadProduct(pageNumber, rowPerPage);
+      loadProduct(pageNumber, rowPerPage, searchValue);
       break;
   }
 };
 
 let pageNumber = $("#page-number").val();
 let rowPerPage = $("#row-per-page").val();
-
-loadData(pageNumber, rowPerPage);
+let inputSearchValue = $("#search-data").val();
+loadData(pageNumber, rowPerPage, inputSearchValue);
 
 const deleteRecord = (id) => {
   let table;

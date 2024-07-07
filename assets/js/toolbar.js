@@ -137,3 +137,18 @@ $("#row-per-page").change(function () {
   }
   loadData(pageNumber, totalRowDisplayed);
 });
+
+//search
+const search = () => {
+  let searchValue = $("#search-data").val();
+  let pageNumber = $("#page-number").val();
+  let totalRowDisplayed = $("#row-per-page").val();
+
+  loadData(pageNumber, totalRowDisplayed, searchValue);
+};
+// keyCode 13 is ENTER
+$("#search-data").keydown(function (e) {
+  if (e.keyCode == 13) {
+    search();
+  }
+});

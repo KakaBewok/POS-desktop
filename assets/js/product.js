@@ -1,11 +1,18 @@
-const totalProductPage = (totalRowDisplayed) => {
-  const query = `SELECT COUNT(*) as total_row from product`;
+const totalProductPage = (totalRowDisplayed, searchValue) => {
+  let query;
+  if (searchValue != "") {
+    query = `SELECT COUNT(*) as total_row FROM product WHERE product_name LIKE '${searchValue}' escape '!' OR product_code LIKE '${searchValue}' escape '!' OR barcode LIKE '${searchValue}' escape '!' OR category LIKE '${searchValue}' escape '!' OR selling_price LIKE '${searchValue}' escape '!' OR cost_of_product LIKE '${searchValue}' escape '!' OR product_initial_qty LIKE '${searchValue}' escape '!' OR unit LIKE '${searchValue}' escape '!' `;
+  } else {
+    query = `SELECT COUNT(*) as total_row from product`;
+  }
   db.serialize(() => {
     db.each(query, (err, result) => {
       if (err) throw err;
 
       let totalPage;
-      if (result.total_row % totalRowDisplayed == 0) {
+      if (result.total_row < totalRowDisplayed) {
+        totalPage = 1;
+      } else if (result.total_row % totalRowDisplayed == 0) {
         totalPage = parseInt(result.total_row) / parseInt(totalRowDisplayed);
       } else {
         totalPage = parseInt(result.total_row / totalRowDisplayed) + 1;
@@ -16,7 +23,7 @@ const totalProductPage = (totalRowDisplayed) => {
   });
 };
 
-const loadProduct = (pageNumber, totalRowDisplayed) => {
+const loadProduct = (pageNumber, totalRowDisplayed, searchValue) => {
   let offsetNumber;
 
   if (pageNumber < 2) {
@@ -25,9 +32,14 @@ const loadProduct = (pageNumber, totalRowDisplayed) => {
     offsetNumber = (pageNumber - 1) * totalRowDisplayed;
   }
 
-  totalPage(totalRowDisplayed);
+  totalPage(totalRowDisplayed, searchValue);
 
-  const query = `SELECT * FROM product ORDER BY id DESC LIMIT ${offsetNumber}, ${totalRowDisplayed}`;
+  let query;
+  if (searchValue != "") {
+    query = `SELECT * FROM product WHERE product_name LIKE '%${searchValue}%' escape '!' OR product_code LIKE '${searchValue}' escape '!' OR barcode LIKE '${searchValue}' escape '!' OR category LIKE '${searchValue}' escape '!' OR selling_price LIKE '${searchValue}' escape '!' OR cost_of_product LIKE '${searchValue}' escape '!' OR product_initial_qty LIKE '${searchValue}' escape '!' OR unit LIKE '${searchValue}' escape '!' ORDER BY id DESC LIMIT ${offsetNumber}, ${totalRowDisplayed} `;
+  } else {
+    query = `SELECT * FROM product ORDER BY id DESC LIMIT ${offsetNumber}, ${totalRowDisplayed}`;
+  }
   db.serialize(() => {
     db.all(query, (err, rows) => {
       if (err) throw err;
