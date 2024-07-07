@@ -79,3 +79,61 @@ const unSelectAll = () => {
   $("input.data-checkbox").prop("checked", false);
   $("tbody#data tr").removeClass("bg-cyan-600 text-white");
 };
+
+//pagiantion
+$("#first-page").click(function (e) {
+  e.preventDefault();
+  let totalRowDisplayed = $("#row-per-page").val();
+  $("#page-number").val(1);
+  loadData(1, totalRowDisplayed);
+});
+$("#last-page").click(function (e) {
+  e.preventDefault();
+  let totalPage = $("#total-page").val();
+  $("#page-number").val(totalPage);
+  let totalRowDisplayed = $("#row-per-page").val();
+  loadData(totalPage, totalRowDisplayed);
+});
+$("#page-number").keyup(function () {
+  let pageNumber = $(this).val();
+  let totalRowDisplayed = $("#row-per-page").val();
+  loadData(pageNumber, totalRowDisplayed);
+});
+$("#next-page").click(function (e) {
+  e.preventDefault();
+  let totalPage = $("#total-page").val();
+  let inputPageNumber = $("#page-number").val();
+  if (inputPageNumber == "") {
+    inputPageNumber = 1;
+  }
+
+  let pageNumber = parseInt(inputPageNumber);
+  let totalRowDisplayed = $("#row-per-page").val();
+  if (pageNumber < totalPage) {
+    $("#page-number").val(pageNumber + 1);
+    loadData(pageNumber + 1, totalRowDisplayed);
+  }
+});
+$("#prev-page").click(function (e) {
+  e.preventDefault();
+
+  let inputPageNumber = $("#page-number").val();
+  let pageNumber = parseInt(inputPageNumber);
+
+  if (pageNumber > 1) {
+    $("#page-number").val(pageNumber - 1);
+    let totalRowDisplayed = $("#row-per-page").val();
+    loadData(pageNumber - 1, totalRowDisplayed);
+  }
+});
+$("#row-per-page").change(function () {
+  let totalRowDisplayed = $(this).val();
+  let pageNumber = $("#page-number").val();
+  let totalPage = $("#total-page").val();
+
+  if (pageNumber > totalPage) {
+    pageNumber = 1;
+    $("#page-number").val(1);
+  }
+  loadData(pageNumber, totalRowDisplayed);
+});
