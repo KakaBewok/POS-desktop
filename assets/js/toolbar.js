@@ -167,3 +167,29 @@ $("#search-data").keyup(function (e) {
     loadData(pageNumber, rowPerPage);
   }
 });
+
+//export data
+const exportData = (extension) => {
+  let arrayIds;
+
+  $("input.data-checkbox:checked").each(function () {
+    let id = $(this).attr("id");
+    arrayIds.push(id);
+  });
+
+  let filePath = dialog.showSaveBoxSync({
+    title: "Export Data",
+    filters: [{ name: extension, extensions: [extension] }],
+  });
+
+  if (filepath != undefined) {
+    if (arrayIds < 1) {
+      executeExport(filePath, extension);
+    } else {
+      let joinIds = arrayIds.join(", ");
+      executeExport(filePath, extension, joinIds);
+    }
+  } else {
+    console.log("Something went wrong");
+  }
+};
