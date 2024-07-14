@@ -113,3 +113,9 @@ ipcMain.on("update:success", (e, docId) => {
   }
   editDataModal.close();
 });
+
+const writeCsv = (filePath, content) => {};
+
+ipcMain.on("write:csv", (e, filePath, content) => {
+  writeCsv(filePath, content);
+});

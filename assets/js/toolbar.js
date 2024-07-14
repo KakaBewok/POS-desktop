@@ -193,3 +193,23 @@ const exportData = (extension) => {
     console.log("Something went wrong");
   }
 };
+
+const executeExport = (filePath, extension, ids = false) => {
+  switch (extension) {
+    case "csv":
+      exportCsv(filePath, extension, ids);
+      break;
+    case "pdf":
+      exportPdf(filePath, extension, ids);
+      break;
+  }
+};
+
+const exportCsv = (filePath, extension, ids = false) => {
+  const docId = $("body").attr("id");
+  switch (docId) {
+    case "product-data":
+      exportCsvProductData(filePath, extension, ids);
+      break;
+  }
+};

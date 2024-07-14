@@ -393,3 +393,29 @@ ipcRenderer.on("update:success", (e, message) => {
   alertSuccess(message);
   loadData();
 });
+
+const exportCsvProductData = (filePath, extension, ids = false) => {
+  let sql;
+  let filePath = filePath.replace(/\\/g, "/");
+
+  if (ids) {
+    sql = `select * from product where id in ${ids} order by id desc`;
+  } else {
+    sql = `select * from product order by id desc`;
+  }
+
+  db.all(query, (err, results) => {
+    if (err) throw err;
+
+    const convertToCsv = (array) => {
+      let arrayResult = [Object.keys(array[0])].concat(array);
+      return arrayResult
+        .map((item) => {
+          return Object.values(item).toString();
+        })
+        .join("\r\n");
+    };
+    let content = convertToCsv(results);
+    ipcRenderer.send("write:csv", filePath, content);
+  });
+};
