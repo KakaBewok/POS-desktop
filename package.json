@@ -12,6 +12,7 @@
   "dependencies": {
     "@electron/remote": "^2.1.2",
     "electron": "^30.0.9",
+    "fs": "^0.0.1-security",
     "imask": "^7.6.1",
     "sqlite3": "^5.1.7"
   },

@@ -396,7 +396,7 @@ ipcRenderer.on("update:success", (e, message) => {
 
 const exportCsvProductData = (filePath, extension, ids = false) => {
   let sql;
-  let filePath = filePath.replace(/\\/g, "/");
+  filePath = filePath.replace(/\\/g, "/");
 
   if (ids) {
     sql = `select * from product where id in ${ids} order by id desc`;
@@ -404,7 +404,7 @@ const exportCsvProductData = (filePath, extension, ids = false) => {
     sql = `select * from product order by id desc`;
   }
 
-  db.all(query, (err, results) => {
+  db.all(sql, (err, results) => {
     if (err) throw err;
 
     const convertToCsv = (array) => {

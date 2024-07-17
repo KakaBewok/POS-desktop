@@ -1,5 +1,5 @@
 const electron = require("electron");
-const { app, BrowserWindow, ipcMain, screen } = electron;
+const { app, BrowserWindow, ipcMain, screen, dialog } = electron;
 const db = require("./config/database/config-db");
 const remote = require("@electron/remote/main");
 remote.initialize();
@@ -57,7 +57,7 @@ const productWin = () => {
     height,
     title: "My POS | Product",
   });
-  // productWindow.webContents.openDevTools();
+  productWindow.webContents.openDevTools();
   productWindow.loadFile("windows/product.html");
 
   remote.enable(productWindow.webContents);
@@ -114,7 +114,17 @@ ipcMain.on("update:success", (e, docId) => {
   editDataModal.close();
 });
 
-const writeCsv = (filePath, content) => {};
+const writeCsv = (filePath, content) => {
+  fs.writeFile(filePath, content, (err) => {
+    if (err) throw err;
+
+    dialog.showMessageBoxSync({
+      title: "Alert",
+      type: "info",
+      message: "CSV file created",
+    });
+  });
+};
 
 ipcMain.on("write:csv", (e, filePath, content) => {
   writeCsv(filePath, content);
