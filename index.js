@@ -2,6 +2,10 @@ const electron = require("electron");
 const { app, BrowserWindow, ipcMain, screen, dialog } = electron;
 const db = require("./config/database/config-db");
 const remote = require("@electron/remote/main");
+const fs = require("fs");
+const path = require("path");
+const url = require("url");
+const md5 = require("md5");
 remote.initialize();
 
 let mainWindow;
