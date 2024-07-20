@@ -183,7 +183,7 @@ const exportData = (extension) => {
   });
 
   if (filePath != undefined) {
-    if (arrayIds < 1) {
+    if (arrayIds.length < 1) {
       executeExport(filePath, extension);
     } else {
       let joinIds = arrayIds.join(",");
