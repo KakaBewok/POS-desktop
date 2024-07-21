@@ -213,3 +213,12 @@ const exportCsv = (filePath, extension, ids = false) => {
       break;
   }
 };
+
+const exportPdf = (filePath, extension, ids = false) => {
+  const docId = $("body").attr("id");
+  switch (docId) {
+    case "product-data":
+      exportPdfProductData(filePath, extension, ids);
+      break;
+  }
+};

@@ -422,3 +422,100 @@ const exportCsvProductData = (filePath, extension, ids = false) => {
     ipcRenderer.send("write:csv", filePath, content);
   });
 };
+
+const exportPdfProductData = (filePath, extension, ids = false) => {
+  let sql;
+  filePath = filePath.replace(/\\/g, "/");
+
+  if (ids) {
+    sql = `select * from product where id in (${ids}) order by id desc`;
+
+    db.all(sql, (err, results) => {
+      if (err) throw err;
+
+      let tbody = "";
+      let thead = `
+                    <tr>
+                        <th>Id</th>
+                        <th>Product</th>
+                        <th>Produc Code</th>
+                        <th>Barcode</th>
+                        <th>Category</th>
+                        <th>Price/Unit</th>
+                        <th>Product Cost</th>
+                        <th>Unit</th>
+                        <th>Initial Stock</th>
+                    </tr>
+                  `;
+      results.forEach((row) => {
+        tbody += `
+                  <tr>
+                    <td>${row.id}</td>
+                    <td>${row.product_name}</td>
+                    <td>${row.product_code}</td>
+                    <td>${row.barcode}</td>
+                    <td>${row.category}</td>
+                    <td>${row.selling_price}</td>
+                    <td>${row.cost_of_product}</td>
+                    <td>${row.unit}</td>
+                    <td>${row.product_initial_qty}</td>
+                  </tr>
+                `;
+      });
+
+      ipcRenderer.send(
+        "load:to-pdf",
+        thead,
+        tbody,
+        filePath,
+        "produc-data",
+        "Product Data"
+      );
+    });
+  } else {
+    sql = `select * from product order by id desc`;
+
+    db.all(sql, (err, results) => {
+      if (err) throw err;
+
+      let tbody = "";
+      let thead = `
+                    <tr>
+                        <th>Id</th>
+                        <th>Product</th>
+                        <th>Produc Code</th>
+                        <th>Barcode</th>
+                        <th>Category</th>
+                        <th>Price/Unit</th>
+                        <th>Product Cost</th>
+                        <th>Unit</th>
+                        <th>Initial Stock</th>
+                    </tr>
+                  `;
+      results.forEach((row) => {
+        tbody += `
+                  <tr>
+                    <td>${row.id}</td>
+                    <td>${row.product_name}</td>
+                    <td>${row.product_code}</td>
+                    <td>${row.barcode}</td>
+                    <td>${row.category}</td>
+                    <td>${row.selling_price}</td>
+                    <td>${row.cost_of_product}</td>
+                    <td>${row.unit}</td>
+                    <td>${row.product_initial_qty}</td>
+                  </tr>
+                `;
+      });
+
+      ipcRenderer.send(
+        "load:to-pdf",
+        thead,
+        tbody,
+        filePath,
+        "produc-data",
+        "Product Data"
+      );
+    });
+  }
+};

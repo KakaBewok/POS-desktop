@@ -12,6 +12,8 @@ let mainWindow;
 let productWindow;
 let editDataModal;
 
+let toPdf;
+
 const mainWin = () => {
   mainWindow = new BrowserWindow({
     webPreferences: {
@@ -132,4 +134,86 @@ const writeCsv = (filePath, content) => {
 
 ipcMain.on("write:csv", (e, filePath, content) => {
   writeCsv(filePath, content);
+});
+
+const loadToPdf = (thead, tbody, filePath, docId = false, title) => {
+  toPdf = new BrowserWindow({
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+    show: false,
+  });
+
+  let dt = new Date();
+  let day = dt.getDate().toString().padStart(2, 0);
+  let month = dt.getMonth().toString().padStart(2, 0);
+  let year = dt.getFullYear();
+  let today = `${day}/${month}/${year}`;
+
+  let titleObject = {
+    title,
+    date: today,
+  };
+
+  let sql = `select * from profile order by id asc limit 1`;
+  db.all(sql, (err, row) => {
+    if (err) throw err;
+
+    if (row.length < 1) {
+      titleObject.storeName = "My Store";
+      titleObject.storeAddress = "Address";
+      titleObject.storeLogo = "shop.png";
+    } else {
+      titleObject.storeName = row[0].store_name;
+      titleObject.storeAddress = row[0].address;
+      if (row[0].logo == null || row[0].logo == "") {
+        titleObject.storeLogo = "shop.png";
+      } else {
+        titleObject.storeLogo = row[0].logo;
+      }
+    }
+  });
+
+  switch (docId) {
+    case "sales-report":
+      toPdf.loadFile("export-pdf/sales-record-pdf.html");
+      break;
+    default:
+      toPdf.loadFile("export-pdf/toPdf.html");
+  }
+
+  toPdf.webContents.on("dom-ready", () => {
+    toPdf.webContents.send("load:table-to-pdf", thead, tbody, titleObject);
+  });
+
+  toPdf.webContents.on("did-finish-load", () => {
+    toPdf.webContents
+      .printToPdf({
+        marginsType: 0,
+        printBackground: true,
+        printSelectionOnly: false,
+        landscape: true,
+      })
+      .then((data) => {
+        fs.writeFile((filePath, data, err) => {
+          if (err) throw err;
+
+          toPdf.close();
+
+          dialog.showMessageBoxSync({
+            title: "Alert",
+            type: "info",
+            message: "Successfully export data to PDF",
+          });
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+};
+
+ipcMain.on("load:to-pdf", (e, thead, tbody, filePath, docId, title) => {
+  loadToPdf(thead, tbody, filePath, docId, title);
 });
