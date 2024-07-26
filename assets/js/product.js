@@ -433,12 +433,12 @@ const exportPdfProductData = (filePath, extension, ids = false) => {
     db.all(sql, (err, results) => {
       if (err) throw err;
 
-      let tbody = "";
+      let tbody = ``;
       let thead = `
                     <tr>
                         <th>Id</th>
                         <th>Product</th>
-                        <th>Produc Code</th>
+                        <th>Product Code</th>
                         <th>Barcode</th>
                         <th>Category</th>
                         <th>Price/Unit</th>
@@ -478,12 +478,12 @@ const exportPdfProductData = (filePath, extension, ids = false) => {
     db.all(sql, (err, results) => {
       if (err) throw err;
 
-      let tbody = "";
+      let tbody = ``;
       let thead = `
                     <tr>
                         <th>Id</th>
                         <th>Product</th>
-                        <th>Produc Code</th>
+                        <th>Product Code</th>
                         <th>Barcode</th>
                         <th>Category</th>
                         <th>Price/Unit</th>

@@ -156,7 +156,7 @@ const loadToPdf = (thead, tbody, filePath, docId = false, title) => {
     date: today,
   };
 
-  let sql = `select * from profile order by id asc limit 1`;
+  let sql = `select * from profile order by id asc`;
   db.all(sql, (err, row) => {
     if (err) throw err;
 
@@ -177,10 +177,10 @@ const loadToPdf = (thead, tbody, filePath, docId = false, title) => {
 
   switch (docId) {
     case "sales-report":
-      toPdf.loadFile("export-pdf/sales-record-pdf.html");
+      toPdf.loadFile("export-pdf/sales-report-pdf.html");
       break;
     default:
-      toPdf.loadFile("export-pdf/toPdf.html");
+      toPdf.loadFile("export-pdf/to-pdf.html");
   }
 
   toPdf.webContents.on("dom-ready", () => {
@@ -189,14 +189,14 @@ const loadToPdf = (thead, tbody, filePath, docId = false, title) => {
 
   toPdf.webContents.on("did-finish-load", () => {
     toPdf.webContents
-      .printToPdf({
+      .printToPDF({
         marginsType: 0,
         printBackground: true,
         printSelectionOnly: false,
         landscape: true,
       })
       .then((data) => {
-        fs.writeFile((filePath, data, err) => {
+        fs.writeFile(filePath, data, (err) => {
           if (err) throw err;
 
           toPdf.close();

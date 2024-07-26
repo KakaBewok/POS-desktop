@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="../assets/css/output.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="py-5 text-white bg-slate-600">
+      <div class="overflow-x-auto">
+        <div class="header">
+          <div class="store-info">
+            <h5 id="store-name">Test</h5>
+            <div id="store-address"></div>
+            <div id="date"></div>
+          </div>
+          <h4 id="title"></h4>
+        </div>
+        <table class="table table-pin-cols">
+          <thead id="thead-to-pdf"></thead>
+          <tbody id="tbody-to-pdf" class="cursor-pointer"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="../assets/jquery/jquery-1.9.0.min.js"></script>
+    <script src="../assets/js/require.js"></script>
+    <script>
+      ipcRenderer.on("load:table-to-pdf", (e, thead, tbody, titleObject) => {
+        $("#thead-to-pdf").html(thead);
+        $("#tbody-to-pdf").html(tbody);
+        $("#store-name").html(titleObject.storeName);
+        $("#store-address").html(titleObject.storeAddress);
+        $("#title").html(titleObject.title);
+        $("#date").html(`Date: ${titleObject.date}`);
+      });
+    </script>
+  </body>
+</html>

@@ -5,6 +5,7 @@ module.exports = {
     "./windows/**/*.{html,js}",
     "./assets/js/**/*.{html,js}",
     "./modals/**/*.{html,js}",
+    "./export-pdf/**/*.{html,js}",
   ],
   theme: {
     extend: {},
